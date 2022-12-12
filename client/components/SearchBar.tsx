@@ -4,7 +4,7 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 import IconsList from '../components/IconsList';
 import Button from './Button';
 
-export default function SearchBar({ isVisible, children, onClose }: any) {
+export default function SearchBar({ isVisible, onClose }: any) {
   const setPickedIcon = () => {
     console.log('negr')
   }
@@ -21,7 +21,7 @@ export default function SearchBar({ isVisible, children, onClose }: any) {
           <IconsList onSelect={(setPickedIcon)} onCloseModal={onClose} />
           <Pressable
             onPress={() => {setPickedIcon()}}>
-            <Image source={require('../assets/searchbar/Searchbar.png')} style={styles.seachImg} />
+            <Image source={require('../assets/searchbar/Searchbar.png')} style={styles.searchImg} />
         </Pressable>
           <Button label="Search" onPress={setPickedIcon} />
         </View>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
       marginTop: 24,
       width: 100
     },
-    seachImg: {
+    searchImg: {
       width: Dimensions.get('window').width * 0.85,
       height: 512 / (3063 / (Dimensions.get('window').width * 0.85)),
       marginBottom: 96

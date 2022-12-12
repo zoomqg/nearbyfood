@@ -3,12 +3,12 @@ import { StyleSheet, FlatList, Image, Platform, Pressable } from 'react-native';
 
 export default function IconsList({ onSelect, onCloseModal }: any) {
     const [icons] = useState([
-        require('../assets/food_icons/icons_with_shadow/bistro.png'),
+        require('../assets/food_icons/icons_with_shadow/dining_room.png'),
         require('../assets/food_icons/icons_with_shadow/burger.png'),
-        require('../assets/food_icons/icons_with_shadow/cookies.png'),
-        require('../assets/food_icons/icons_with_shadow/croissant.png'),
+        require('../assets/food_icons/icons_with_shadow/bakery.png'),
+        require('../assets/food_icons/icons_with_shadow/cafe.png'),
         require('../assets/food_icons/icons_with_shadow/grocery.png'),
-        require('../assets/food_icons/icons_with_shadow/pizza.png'),
+        require('../assets/food_icons/icons_with_shadow/pizzeria.png'),
         require('../assets/food_icons/icons_with_shadow/ramen.png'),
         require('../assets/food_icons/icons_with_shadow/restaurant.png'),
     ]);

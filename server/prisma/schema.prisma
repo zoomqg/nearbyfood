@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  ID               Int                @id @default(autoincrement())
+  Category         String?            @db.VarChar(30)
+  Place            Place[]
+  Place_Submission Place_Submission[]
+}
+
+model Feedback {
+  ID            Int     @id @default(autoincrement())
+  Place_ID      Int
+  Rate          Int     @db.TinyInt
+  Comment       String? @db.VarChar(140)
+  Budget_Rating Int?    @db.TinyInt
+  User_ID       Int?
+  Place         Place   @relation(fields: [Place_ID], references: [ID], onUpdate: Restrict, map: "Feedback_ibfk_1")
+  User          User?   @relation(fields: [User_ID], references: [ID], onDelete: Restrict, onUpdate: Restrict, map: "Feedback_ibfk_2")
+
+  @@index([Place_ID], map: "Place_ID")
+  @@index([User_ID], map: "Users_ID")
+}
+
+model Place {
+  ID                  Int        @id @default(autoincrement())
+  Title               String     @db.VarChar(50)
+  Adress              String?    @db.VarChar(255)
+  Category_ID         Int
+  Latitude            Float      @db.Float
+  Longitude           Float      @db.Float
+  Added_Timestamp     DateTime   @default(now()) @db.Timestamp(0)
+  Requested_Timestamp DateTime?  @db.DateTime(0)
+  Opened              Boolean?   @default(true)
+  Submission_User_ID  Int?
+  Feedback            Feedback[]
+  Category            Category   @relation(fields: [Category_ID], references: [ID], onUpdate: Restrict, map: "Place_ibfk_1")
+  User                User?      @relation(fields: [Submission_User_ID], references: [ID], onDelete: Restrict, onUpdate: Restrict, map: "Place_ibfk_2")
+
+  @@index([Category_ID], map: "Category_ID")
+  @@index([Submission_User_ID], map: "Submission User")
+}
+
+model Place_Submission {
+  ID                  Int      @id @default(autoincrement())
+  Title               String   @db.VarChar(50)
+  Adress              String?  @db.VarChar(255)
+  Category_ID         Int
+  Latitude            Float    @db.Float
+  Longitude           Float    @db.Float
+  Requested_Timestamp DateTime @default(now()) @db.Timestamp(0)
+  Submission_User_ID  Int?
+  Category            Category @relation(fields: [Category_ID], references: [ID], onUpdate: Restrict, map: "Place_Submission_ibfk_1")
+  User                User?    @relation(fields: [Submission_User_ID], references: [ID], onDelete: Restrict, onUpdate: Restrict, map: "Place_Submission_ibfk_2")
+
+  @@index([Category_ID], map: "Category_ID")
+  @@index([Submission_User_ID], map: "Submission User")
+}
+
+model User {
+  ID                     Int                @id @default(autoincrement())
+  Name                   String             @db.VarChar(20)
+  Surname                String             @db.VarChar(20)
+  Login                  String?            @db.VarChar(20)
+  Password               String?            @db.VarChar(20)
+  Phone                  String             @db.VarChar(15)
+  Email                  String?            @db.VarChar(50)
+  Registration_Timestamp DateTime           @default(now()) @db.Timestamp(0)
+  Role                   User_Role?         @default(USER)
+  Feedback               Feedback[]
+  Place                  Place[]
+  Place_Submission       Place_Submission[]
+}
+
+enum User_Role {
+  USER
+  ADMIN
+  MODERATOR
+}
