@@ -4,7 +4,7 @@ import { StyleSheet, FlatList, Image, Platform, Pressable } from 'react-native';
 export default function IconsList({ onSelect, onCloseModal }: any) {
     const [icons] = useState([
         require('../assets/food_icons/icons_with_shadow/dining_room.png'),
-        require('../assets/food_icons/icons_with_shadow/burger.png'),
+        require('../assets/food_icons/icons_with_shadow/fastfood.png'),
         require('../assets/food_icons/icons_with_shadow/bakery.png'),
         require('../assets/food_icons/icons_with_shadow/cafe.png'),
         require('../assets/food_icons/icons_with_shadow/grocery.png'),

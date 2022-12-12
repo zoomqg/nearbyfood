@@ -2,18 +2,21 @@ import { Modal, View, Text, Pressable, StyleSheet, Image, Dimensions } from 'rea
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import IconsList from '../components/IconsList';
+import { gql, useQuery } from '@apollo/client'
 import Button from './Button';
+import Loading from './Loading'
+
 
 export default function SearchBar({ isVisible, onClose }: any) {
   const setPickedIcon = () => {
-    console.log('negr')
+    console.log('negr');
   }
   return (
     <GestureRecognizer
       style={{flex: 1}}
       onSwipeDown={onClose}
     >
-      <Modal animationType="slide" transparent={true} visible={isVisible}>
+      <Modal animationType="slide" transparent={true} visible={isVisible} onRequestClose={onClose}>
         <View style={styles.modalContent}>
           <View style={styles.titleContainer}>
             <Image source={require('../assets/searchbar/line.png')} style={styles.lineImage}></Image>
