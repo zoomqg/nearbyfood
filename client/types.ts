@@ -85,6 +85,7 @@ export type Query = {
   users?: Maybe<Array<User>>;
   place?: Maybe<Place>;
   places?: Maybe<Array<Place>>;
+  places_by_category?: Maybe<Array<Place>>;
   place_submission?: Maybe<Place_Submission>;
   place_submissions?: Maybe<Array<Place_Submission>>;
   category?: Maybe<Category>;
@@ -104,6 +105,11 @@ export type QueryPlaceArgs = {
 };
 
 
+export type QueryPlaces_By_CategoryArgs = {
+  Category?: InputMaybe<Scalars['String']>;
+};
+
+
 export type QueryPlace_SubmissionArgs = {
   ID: Scalars['ID'];
 };
@@ -116,4 +122,21 @@ export type QueryCategoryArgs = {
 
 export type QueryFeedbackbyidArgs = {
   ID: Scalars['ID'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  sendSMS: Scalars['Int'];
+  approveSMS: Scalars['Int'];
+};
+
+
+export type MutationSendSmsArgs = {
+  number: Scalars['String'];
+};
+
+
+export type MutationApproveSmsArgs = {
+  number: Scalars['String'];
+  code: Scalars['String'];
 };

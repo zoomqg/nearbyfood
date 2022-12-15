@@ -72,12 +72,18 @@ const typeDefs = `#graphql
         users: [User!]
         place(ID: ID!): Place
         places: [Place!]
+        places_by_category(Category: String): [Place!]
         place_submission(ID: ID!): Place_Submission
         place_submissions: [Place_Submission!]
         category(ID: ID!): Category
         categories: [Category!]
         feedbackbyid(ID: ID!): FeedBack
         all_feedback: [FeedBack!]
+    }
+
+    type Mutation {
+        sendSMS(number: String!) : Int!
+        approveSMS(number: String!, code: String!) : Int!
     }
 `;
 

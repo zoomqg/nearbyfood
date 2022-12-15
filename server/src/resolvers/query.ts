@@ -26,6 +26,20 @@ const Query = {
             }
         });
     },
+    places_by_category: (parent, args) => {
+        return prisma.place.findMany({
+            where: {
+              Category: {
+                Category : {
+                  contains: String(args.Category)
+                }
+              }
+            },
+            include: {
+              Category: true
+            }
+          });
+    },
     category: (parent, args) => {
         return prisma.category.findFirst({
             where: { ID: Number(args.ID) },

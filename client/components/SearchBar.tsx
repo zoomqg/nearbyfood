@@ -7,9 +7,9 @@ import Button from './Button';
 import Loading from './Loading'
 
 
-export default function SearchBar({ isVisible, onClose }: any) {
-  const setPickedIcon = () => {
-    console.log('negr');
+export default function SearchBar({ isVisible, onClose, setMapDisplays }: any) {
+  const setPickedIcon = (item: any) => {
+    setMapDisplays(item);
   }
   return (
     <GestureRecognizer
@@ -23,7 +23,7 @@ export default function SearchBar({ isVisible, onClose }: any) {
           </View>
           <IconsList onSelect={(setPickedIcon)} onCloseModal={onClose} />
           <Pressable
-            onPress={() => {setPickedIcon()}}>
+            onPress={(item) => {setPickedIcon(item)}}>
             <Image source={require('../assets/searchbar/Searchbar.png')} style={styles.searchImg} />
         </Pressable>
           <Button label="Search" onPress={setPickedIcon} />

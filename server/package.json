@@ -15,8 +15,10 @@
   "dependencies": {
     "@apollo/server": "^4.2.2",
     "@prisma/client": "^4.7.0",
+    "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "twilio": "^3.83.4"
   },
   "devDependencies": {
     "@types/node": "^18.11.9",

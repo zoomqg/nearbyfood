@@ -1,22 +1,17 @@
 import { useState } from 'react';
 import { StyleSheet, FlatList, Image, Platform, Pressable } from 'react-native';
+import { Category } from '../types';
+import Loading from './Loading';
+import ImageURLS from './ImagesURLs';
 
 export default function IconsList({ onSelect, onCloseModal }: any) {
-    const [icons] = useState([
-        require('../assets/food_icons/icons_with_shadow/dining_room.png'),
-        require('../assets/food_icons/icons_with_shadow/fastfood.png'),
-        require('../assets/food_icons/icons_with_shadow/bakery.png'),
-        require('../assets/food_icons/icons_with_shadow/cafe.png'),
-        require('../assets/food_icons/icons_with_shadow/grocery.png'),
-        require('../assets/food_icons/icons_with_shadow/pizzeria.png'),
-        require('../assets/food_icons/icons_with_shadow/ramen.png'),
-        require('../assets/food_icons/icons_with_shadow/restaurant.png'),
-    ]);
+    const [icons] = useState(ImageURLS.with_shadow);
+    
     return(
         <FlatList
             horizontal
             showsHorizontalScrollIndicator={Platform.OS === 'web' ? true : false}
-            data={icons}
+            data={Object.keys(icons)}
             contentContainerStyle={styles.listContainer}
             renderItem={({ item, index }) => {
                 return(
@@ -25,7 +20,7 @@ export default function IconsList({ onSelect, onCloseModal }: any) {
                         onSelect(item);
                         onCloseModal();
                         }}>
-                        <Image source={item} key={index} style={styles.image} />
+                        <Image source={icons[item as keyof typeof icons]} key={index} style={styles.image} />
                     </Pressable>
                 );
             }}

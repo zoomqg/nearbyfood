@@ -24,10 +24,21 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.zoomqge.nearbyfood",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBhLwIT7yw9NEmPrh8NOv82SkyzaAokxlw"
+        }
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "09a01b02-116f-4432-afd2-840e129d7cf9"
+      }
     }
   }
 }
