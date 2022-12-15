@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, Pressable, TextInput , Button } from 'react-native'; 
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { gql, useMutation } from '@apollo/client';
-import Loading from './Loading';
+import Loading from '../components/Loading';
 
 const REGISTER_MUTATION = gql`
     mutation RegisterUser($number: String!, $name: String!, $surname: String!) {
@@ -21,11 +21,15 @@ const REGISTER_MUTATION = gql`
 `;
 
 
-export default function Register({ setUser, phone_number }: any){
+export default function RegisterScreen({ route, navigation }: any){
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const { phoneNumber } = route.params;
     const [registerUser, { error, loading }] = useMutation(REGISTER_MUTATION, {
-        onCompleted: data => {
-            setUser(data.registerUser)
-            console.log(data)
+        onCompleted: () => {
+            navigation.navigate("Map", {
+                phoneNumber: phoneNumber
+            });
         },
     });
 
@@ -34,17 +38,14 @@ export default function Register({ setUser, phone_number }: any){
 
     const precessRegistration = () => {
         registerUser({ variables: {
-            number: phone_number,
+            number: phoneNumber,
             name: name,
             surname: surname
         } })
     }
     
-    
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
     return(
-        <View style={styles.regcontainer}>
+        <SafeAreaView style={styles.regcontainer}>
             <Text style={styles.login_text}>Looks like you are new here!</Text>
             <Text style={styles.login_text}>Could you give me more info about you?</Text>
             <TextInput style={styles.input} placeholder="Name" onChangeText={(name) => setName(name)} value={name} />
@@ -52,7 +53,7 @@ export default function Register({ setUser, phone_number }: any){
             <Pressable style={styles.btn} onPress={() => precessRegistration()} >
                 <Text style={styles.btn_text}>SUBMIT</Text>
             </Pressable>
-        </View>
+        </SafeAreaView>
     )
 }
 

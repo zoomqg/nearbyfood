@@ -83,9 +83,14 @@ const typeDefs = `#graphql
         user_by_number(number: String!): User
     }
 
+    type approveSMSResult {
+        existence_check: Int!,
+        status: Int!
+    }
+
     type Mutation {
         sendSMS(number: String!) : Int!
-        approveSMS(number: String!, code: String!) : Int!
+        approveSMS(number: String!, code: String!) : approveSMSResult!
         registerUser(number: String!, name: String!, surname: String!): User
     }
 `;

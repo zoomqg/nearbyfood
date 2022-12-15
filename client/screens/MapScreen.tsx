@@ -9,9 +9,8 @@ import Button from '../components/Button';
 import SearchBar from '../components/SearchBar';
 import Loading from '../components/Loading';
 import { Place, Place_Submission, User } from '../types';
-import ImageURLS from '../components/ImagesURLs';
 import MarkersChoise from '../components/MarkersChoise';
-import Register from '../components/Register';
+import AdminButton from '../components/Admin_Button';
 
 const MARKERS_QUERY = gql`
 query Query($number: String!) {
@@ -76,8 +75,6 @@ export default function MapScreen({ route, navigation } : any) {
   const mapRef = createRef<MapView>();
    
   const [mapDisplays, setMapDisplays] = useState('all');
-  const [user, setUser] = useState<any>(null)
-
   const onSearch = () =>{
     setIsSearchVisible(true);
   };
@@ -104,8 +101,9 @@ export default function MapScreen({ route, navigation } : any) {
       number: phoneNumber
     },
     onCompleted: data => {
-      setUser(data.user_by_number)
+      console.log(data)
     }
+    
   });
 
   if (loading) return <Loading />
@@ -119,7 +117,6 @@ export default function MapScreen({ route, navigation } : any) {
   }
   return (
     <SafeAreaView style={styles.container}>
-      {user ? (
         <View>
           <MapView ref={mapRef} style={styles.map} 
             initialRegion={{
@@ -134,12 +131,10 @@ export default function MapScreen({ route, navigation } : any) {
           >
             <MarkersChoise styles={styles} placeArr={places} mapDisplays={mapDisplays} />
           </MapView>
+          { data?.user_by_number.Role == "ADMIN" ? <AdminButton place_submissions={data!.place_submissions} /> : null}
           <Button label="Search" onPress={onSearch}/>
           <SearchBar isVisible={isSearchVisible} onClose={onSearchClose} setMapDisplays={setMapDisplays} />
         </View>
-      ):(
-        <Register setUser={setUser} phone_number={phoneNumber}/>
-      )}
     </SafeAreaView>
   );
 };

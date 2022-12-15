@@ -13,13 +13,36 @@ const Mutation = {
     },
 
     approveSMS: async (parent, args) => {
+        // let status = 0
         // const verification = await twilio.verify.v2.services(service_id)
         // .verificationChecks
         // .create({to: args.number, code: args.code});
-        // if(verification.status == 'approved') return 200;
-        // else if (verification.status == 'pending') return 400;
-        // else return 500;
-        return 200;
+        // if(verification.status == 'approved') {
+        //     status = 200;
+        // }
+        // else if (verification.status == 'pending') {
+        //     status = 400;
+        // }
+        // else {
+        //     status = 500
+        // }
+
+        const status = 200;
+
+        const existence_check = await prisma.user.count(
+            {
+                where: {
+                    Phone: args.number
+                }
+            }
+        )
+
+        var result = {
+            existence_check: existence_check,
+            status: status
+        }
+
+        return result;
     },
     registerUser: async (parent, args) => {
         const result = await prisma.user.create({

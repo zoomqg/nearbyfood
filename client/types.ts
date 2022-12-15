@@ -92,6 +92,8 @@ export type Query = {
   categories?: Maybe<Array<Category>>;
   feedbackbyid?: Maybe<FeedBack>;
   all_feedback?: Maybe<Array<FeedBack>>;
+  check_user_existence: Scalars['Int'];
+  user_by_number?: Maybe<User>;
 };
 
 
@@ -124,10 +126,27 @@ export type QueryFeedbackbyidArgs = {
   ID: Scalars['ID'];
 };
 
+
+export type QueryCheck_User_ExistenceArgs = {
+  number?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryUser_By_NumberArgs = {
+  number: Scalars['String'];
+};
+
+export type ApproveSmsResult = {
+  __typename?: 'approveSMSResult';
+  existence_check: Scalars['Int'];
+  status: Scalars['Int'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   sendSMS: Scalars['Int'];
-  approveSMS: Scalars['Int'];
+  approveSMS: ApproveSmsResult;
+  registerUser?: Maybe<User>;
 };
 
 
@@ -139,4 +158,11 @@ export type MutationSendSmsArgs = {
 export type MutationApproveSmsArgs = {
   number: Scalars['String'];
   code: Scalars['String'];
+};
+
+
+export type MutationRegisterUserArgs = {
+  number: Scalars['String'];
+  name: Scalars['String'];
+  surname: Scalars['String'];
 };

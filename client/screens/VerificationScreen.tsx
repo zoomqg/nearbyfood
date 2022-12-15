@@ -6,9 +6,13 @@ import Loading from '../components/Loading';
 
 
 const APPROVE_SMS_MUTATION = gql`
-    mutation Mutation($number: String!, $code: String!) {
-        approveSMS(number: $number, code: $code)
+    mutation ApproveSMS($number: String!, $code: String!) {
+        approveSMS(number: $number, code: $code) {
+            existence_check
+            status
+        }
     }
+
 `
 
 export default function VerificationScreen({ route, navigation } : any) {
@@ -17,11 +21,20 @@ export default function VerificationScreen({ route, navigation } : any) {
 
     const [approveSMS, { error, loading }] = useMutation(APPROVE_SMS_MUTATION, {
         onCompleted: data => {
-            console.log(data)
-            if (data.approveSMS == 200) {
-                navigation.navigate("Map", {
-                    phoneNumber: phoneNumber
-                });
+            if (data.approveSMS.status == 200) {
+                // navigation.navigate("Map", {
+                //     phoneNumber: phoneNumber
+                // });
+                
+                if (data.approveSMS.existence_check == 0) {
+                    navigation.navigate("Registration", {
+                        phoneNumber: phoneNumber
+                    });
+                } else {
+                    navigation.navigate("Map", {
+                        phoneNumber: phoneNumber
+                    });
+                }
             }
             else {
                 alert("Something went wrong")

@@ -32,7 +32,8 @@ const ImageURLS = {
         ['ramen']: require('../assets/food_icons/icons_with_bg/ramen.png'),
         ['restaurant']: require('../assets/food_icons/icons_with_bg/restaurant.png'),
         ['undefined']: require('../assets/food_icons/icons_with_bg/undefined.png'),
-    }
+    },
+    admin_button: require("../assets/food_icons/icons_with_bg/admin_button.png"),
 };
 
 export default ImageURLS;

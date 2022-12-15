@@ -8,7 +8,7 @@ import * as Location from 'expo-location';
 import MapScreen from "./screens/MapScreen";
 import AuthScreen from "./screens/AuthScreen";
 import VerificationScreen from "./screens/VerificationScreen";
-
+import RegisterScreen from "./screens/RegisterScreen";
 
 const client = new ApolloClient({
   uri: 'http://192.168.0.103:4000/graphql',
@@ -41,6 +41,7 @@ export default function App(){
         <Stack.Navigator>
           <Stack.Screen name="Authentication" component={AuthScreen} options={{headerShown: false}}/>
           <Stack.Screen name="Verification" component={VerificationScreen} options={{headerShown: false}}/>
+          <Stack.Screen name="Registration" component={RegisterScreen} options={{headerShown: false}}/>
           <Stack.Screen name="Map" component={MapScreen} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>

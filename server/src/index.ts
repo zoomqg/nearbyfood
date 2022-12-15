@@ -19,17 +19,3 @@ listen: { port: 4000 },
 });
 
 console.log(`🚀  Server ready at: ${url}`);
-
-// import { PrismaClient } from '@prisma/client';
-// const prisma = new PrismaClient();
-// export default prisma;
-// const result = await prisma.user.findFirst({
-//   where: { ID: Number(16) },
-//   include: {
-//       Feedback: true,
-//       Place: true,
-//       Place_Submission: true
-//   }
-// });
-
-// console.log(result)
