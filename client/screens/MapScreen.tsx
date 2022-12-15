@@ -8,12 +8,12 @@ import { gql, useQuery } from '@apollo/client';
 import Button from '../components/Button';
 import SearchBar from '../components/SearchBar';
 import Loading from '../components/Loading';
-import { Place } from '../types';
+import { Place, Place_Submission, User } from '../types';
 import ImageURLS from '../components/ImagesURLs';
 import MarkersChoise from '../components/MarkersChoise';
 
 const MARKERS_QUERY = gql`
-query Places {
+query Query($number: String!) {
   places {
     ID
     Title
@@ -30,25 +30,45 @@ query Places {
     Opened
     Submission_User_ID
     User {
-      ID
-      Name
-      Surname
-      Login
-      Password
       Phone
-      Email
-      Registration_Time
-      Role
+    }
+  }
+  user_by_number(number: $number) {
+    ID
+    Surname
+    Phone
+    Role
+    Name
+  }
+  place_submissions {
+    ID
+    Title
+    Adress
+    Category {
+      Category
+      ID
+    }
+    Category_ID
+    Latitude
+    Longitude
+    Requested_Timestamp
+    Submission_User_ID
+    User {
+      Surname
+      Name
     }
   }
 }
 `
 
 type QueryReturns = {
-  places: Place[]
+  places: Place[],
+  place_submissions: Place_Submission[],
+  user_by_number: User
 }
 
-export default function MapScreen({ navigation } : any) {
+export default function MapScreen({ route, navigation } : any) {
+  const { phoneNumber } = route.params;
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false);
@@ -77,7 +97,11 @@ export default function MapScreen({ navigation } : any) {
       )();
     }, []);
 
-  const { data, loading, error } = useQuery<QueryReturns>(MARKERS_QUERY);
+  const { data, loading, error } = useQuery<QueryReturns>(MARKERS_QUERY, {
+    variables: {
+      number: phoneNumber
+    }
+  });
 
   if (loading) return <Loading />
   if (error) return <Loading />
@@ -88,6 +112,8 @@ export default function MapScreen({ navigation } : any) {
   } else if (location) {
     text = JSON.stringify(location);
   }
+  console.log(phoneNumber);
+  console.log(data?.user_by_number);
   return (
     <SafeAreaView style={styles.container}>
       <MapView ref={mapRef} style={styles.map} 

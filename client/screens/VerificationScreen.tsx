@@ -19,7 +19,9 @@ export default function VerificationScreen({ route, navigation } : any) {
         onCompleted: data => {
             console.log(data)
             if (data.approveSMS == 200) {
-                navigation.navigate("Map");
+                navigation.navigate("Map", {
+                    phoneNumber: phoneNumber
+                });
             }
             else {
                 alert("Something went wrong")
