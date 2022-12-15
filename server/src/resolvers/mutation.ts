@@ -1,5 +1,6 @@
 import "dotenv/config"
 import twilio from "../twilio.js";
+import prisma from "../database.js";
 
 const service_id = process.env.TWILIO_SERVICE_ID as string;
 
@@ -19,8 +20,17 @@ const Mutation = {
         // else if (verification.status == 'pending') return 400;
         // else return 500;
         return 200;
+    },
+    registerUser: async (parent, args) => {
+        const result = await prisma.user.create({
+            data: {
+                Name: args.name,
+                Surname: args.surname,
+                Phone: args.number
+            }
+        });
+        return result;
     }
-
 }
 
 export default Mutation;

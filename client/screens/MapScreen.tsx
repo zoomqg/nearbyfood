@@ -11,6 +11,7 @@ import Loading from '../components/Loading';
 import { Place, Place_Submission, User } from '../types';
 import ImageURLS from '../components/ImagesURLs';
 import MarkersChoise from '../components/MarkersChoise';
+import Register from '../components/Register';
 
 const MARKERS_QUERY = gql`
 query Query($number: String!) {
@@ -63,8 +64,8 @@ query Query($number: String!) {
 
 type QueryReturns = {
   places: Place[],
-  place_submissions: Place_Submission[],
-  user_by_number: User
+  user_by_number: User,
+  place_submissions: Place_Submission[]
 }
 
 export default function MapScreen({ route, navigation } : any) {
@@ -75,6 +76,7 @@ export default function MapScreen({ route, navigation } : any) {
   const mapRef = createRef<MapView>();
    
   const [mapDisplays, setMapDisplays] = useState('all');
+  const [user, setUser] = useState<any>(null)
 
   const onSearch = () =>{
     setIsSearchVisible(true);
@@ -100,6 +102,9 @@ export default function MapScreen({ route, navigation } : any) {
   const { data, loading, error } = useQuery<QueryReturns>(MARKERS_QUERY, {
     variables: {
       number: phoneNumber
+    },
+    onCompleted: data => {
+      setUser(data.user_by_number)
     }
   });
 
@@ -112,30 +117,29 @@ export default function MapScreen({ route, navigation } : any) {
   } else if (location) {
     text = JSON.stringify(location);
   }
-  console.log(phoneNumber);
-  console.log(data?.user_by_number);
   return (
     <SafeAreaView style={styles.container}>
-      <MapView ref={mapRef} style={styles.map} 
-          initialRegion={{
-            latitude: 56.95153,
-            longitude: 24.09986,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-          showsUserLocation={true}
-          showsMyLocationButton={true}
-          mapPadding={ {bottom: 60, top: 0, right: 0, left: 0} }
-      >
-        {/* {places.map(place => (
-          <Marker coordinate={ {latitude: place.Latitude, longitude: place.Longitude}} key={place.ID} description={String(place.Adress)} title={place.Title}>
-            <Image source={ImageURLS.with_bg[place.Category.Category as keyof typeof ImageURLS.with_bg]} style={styles.icons_on_map} />
-          </Marker>
-        ))} */}
-        <MarkersChoise styles={styles} placeArr={places} mapDisplays={mapDisplays} />
-      </MapView>
-      <Button label="Search" onPress={onSearch}/>
-      <SearchBar isVisible={isSearchVisible} onClose={onSearchClose} setMapDisplays={setMapDisplays} />
+      {user ? (
+        <View>
+          <MapView ref={mapRef} style={styles.map} 
+            initialRegion={{
+              latitude: 56.95153,
+              longitude: 24.09986,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+            showsUserLocation={true}
+            showsMyLocationButton={true}
+            mapPadding={ {bottom: 60, top: 0, right: 0, left: 0} }
+          >
+            <MarkersChoise styles={styles} placeArr={places} mapDisplays={mapDisplays} />
+          </MapView>
+          <Button label="Search" onPress={onSearch}/>
+          <SearchBar isVisible={isSearchVisible} onClose={onSearchClose} setMapDisplays={setMapDisplays} />
+        </View>
+      ):(
+        <Register setUser={setUser} phone_number={phoneNumber}/>
+      )}
     </SafeAreaView>
   );
 };
