@@ -79,6 +79,8 @@ const typeDefs = `#graphql
         categories: [Category!]
         feedbackbyid(ID: ID!): FeedBack
         all_feedback: [FeedBack!]
+        check_user_existence(number: String): Int!
+        user_by_number(number: String!): User
     }
 
     type Mutation {

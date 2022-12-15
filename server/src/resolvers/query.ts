@@ -92,6 +92,20 @@ const Query = {
             }
         });
     },
+    check_user_existence: (parent, args) => {
+        return prisma.user.count(
+            {
+                where: {
+                    Phone: args.number
+                }
+            }
+        )
+    },
+    user_by_number: (parent, args) => {
+        return prisma.user.findFirst({
+            where: { Phone: args.number }
+        });
+    }
 }
 
 export default Query;
