@@ -11,7 +11,7 @@ import VerificationScreen from "./screens/VerificationScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 
 const client = new ApolloClient({
-  uri: 'http://192.168.0.103:4000/graphql',
+  uri: 'http://192.168.0.101:4000/graphql',
   cache: new InMemoryCache()
 });
 const Stack = createNativeStackNavigator();
