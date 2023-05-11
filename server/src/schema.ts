@@ -92,6 +92,9 @@ const typeDefs = `#graphql
         sendSMS(number: String!) : Int!
         approveSMS(number: String!, code: String!) : approveSMSResult!
         registerUser(number: String!, name: String!, surname: String!): User
+        addFeedback(place_id: String!, rate: Int!, user_id: Int!, comment: String, budget_rating: Int): FeedBack
+        requestPlace(title: String!, adress: String!, category_id: Int!, latitude: Float, longitude: Float, submission_user_iD: int!): Place_Submission
+        approvePlace(place_submission: Place_Submission!, latitude: Float!, longitude: Float!): Place
     }
 `;
 
