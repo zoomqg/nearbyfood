@@ -31,26 +31,38 @@ const typeDefs = `#graphql
         ID: ID!
         Title: String!
         Adress: String
-        Category: Category!
+        Category: Category
         Category_ID: ID!
         Latitude: Float!
         Longitude: Float!
-        Added_Timestamp: String!
+        Added_Timestamp: String
         Requested_Timestamp: String
-        Opened: Int!
+        Opened: Boolean!
         Submission_User_ID: ID!
-        User: User!
+        User: User
         # All_FeedBack: [FeedBack]
+    }
+
+    type Place_Create_Request_Return{
+        ID: ID
+        Title: String!
+        Adress: String!
+        Latitude: Float!
+        Longitude: Float!
+        Added_Timestamp: String
+        Requested_Timestamp: String
+        Opened: Boolean!
+        Submission_User_ID: ID
     }
 
     type Place_Submission {
         ID: ID!
         Title: String!
-        Adress: String
+        Adress: String!
         Category: Category!
         Category_ID: ID!
-        Latitude: Float!
-        Longitude: Float!
+        Latitude: Float
+        Longitude: Float
         Requested_Timestamp: String!
         Submission_User_ID: ID!
         User: User!
@@ -60,7 +72,7 @@ const typeDefs = `#graphql
         ID: ID!
         Rate: Int!
         Comment: String
-        Budget_Rating: String
+        Budget_Rating: String!
         User_ID: ID!
         User: User!
         Place_ID: ID!
@@ -92,9 +104,11 @@ const typeDefs = `#graphql
         sendSMS(number: String!) : Int!
         approveSMS(number: String!, code: String!) : approveSMSResult!
         registerUser(number: String!, name: String!, surname: String!): User
-        addFeedback(place_id: String!, rate: Int!, user_id: Int!, comment: String, budget_rating: Int): FeedBack
-        requestPlace(title: String!, adress: String!, category_id: Int!, latitude: Float, longitude: Float, submission_user_iD: int!): Place_Submission
-        approvePlace(place_submission: Place_Submission!, latitude: Float!, longitude: Float!): Place
+        addFeedback(place_id: Int!, rate: Int!, user_id: Int!, comment: Int!, budget_rating: Int!): FeedBack
+        sendPlaceAddRequest(title: String!, adress: String!, category_id: Int!, latitude: Float, longitude: Float, submission_user_iD: Int!): Place_Submission
+        manageSubmission(place_submission_id: ID!, opened: Boolean, add: Boolean!): Int
+        changeFeedback(Feedback: ID!, user_id: ID!, comment: String, rate: Int, budget_rating: Int)
+        makeReport(place_id: ID!, user_id: ID!, report: String!)
     }
 `;
 

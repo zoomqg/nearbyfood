@@ -50,10 +50,10 @@ model Place {
 model Place_Submission {
   ID                  Int      @id @default(autoincrement())
   Title               String   @db.VarChar(50)
-  Adress              String?  @db.VarChar(255)
+  Adress              String   @db.VarChar(255)
   Category_ID         Int
-  Latitude            Float    @db.Float
-  Longitude           Float    @db.Float
+  Latitude            Float?   @db.Float
+  Longitude           Float?   @db.Float
   Requested_Timestamp DateTime @default(now()) @db.Timestamp(0)
   Submission_User_ID  Int?
   Category            Category @relation(fields: [Category_ID], references: [ID], onUpdate: Restrict, map: "Place_Submission_ibfk_1")

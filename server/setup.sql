@@ -47,7 +47,7 @@ CREATE TABLE db.Feedback(
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     Place_ID INT NOT NULL,
     Rate TINYINT NOT NULL,
-    Comment_ID VARCHAR(140),
+    `Comment` VARCHAR(140),
     Budget_Rating TINYINT,
     User_ID INT,
     FOREIGN KEY (Place_ID) REFERENCES db.Place(ID),

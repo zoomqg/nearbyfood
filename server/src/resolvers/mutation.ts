@@ -1,8 +1,18 @@
 import "dotenv/config"
 import twilio from "../twilio.js";
 import prisma from "../database.js";
+import fetch from 'node-fetch';
+
+async function geocodePlace(input: string, key: string) {
+    const url_string = `https://maps.googleapis.com/maps/api/geocode/json?address=${input}&key=${key}`
+    const response = await fetch(url_string);
+    const jsonData = await response.json();
+    return(jsonData)
+}
+
 
 const service_id = process.env.TWILIO_SERVICE_ID as string;
+const geocode_api_key = process.env.GOOGLE_GEOCODING_API_KEY as string
 
 const Mutation = {
     sendSMS: async (parent, args) => {
@@ -53,7 +63,70 @@ const Mutation = {
             }
         });
         return result;
-    }
+    },
+    addFeedback: async (parent, args) => {
+        try {
+            await prisma.feedback.create({
+                data: {
+                    Place_ID: args.place_id,
+                    Rate: args.rate,
+                    User_ID: args.user_id,
+                    Comment: (args.comment) ? args.comment : "*No comment*",
+                    Budget_Rating: args.budget_rating
+                }
+            })
+            return 200;
+        } catch (err) {
+            console.error(err)
+            return 500
+        }
+    },
+    manageSubmission: async (parent, args) => {
+        try {
+            const submission_data = await prisma.place_Submission.findFirst({
+                where: { ID: Number(args.place_submission_id) },
+                include: {
+                    Category: true,
+                    User: true
+                }
+            });
+            if (args.add) {
+                let geocode_data = await geocodePlace(submission_data.Title + " " + submission_data.Adress, geocode_api_key)
+                
+                if (!geocode_data["results"]) {
+                    geocode_data = await geocodePlace(submission_data.Adress, geocode_api_key)
+                    if (!geocode_data["results"]) {
+                        throw new Error("Geocode API error: " + geocode_data["status"])
+                    }
+                }
+
+                const place_coordinates = geocode_data["results"][0]["geometry"]["location"]
+
+                await prisma.place.create({
+                    data: {
+                        Title: submission_data.Title,
+                        Adress: submission_data.Adress,
+                        Category_ID: submission_data.Category_ID,
+                        Latitude: Number(place_coordinates["lat"]),
+                        Longitude: Number(place_coordinates["lng"]),
+                        Requested_Timestamp: submission_data.Requested_Timestamp,
+                        Opened: (args.opened) ? args.opened : false,
+                        Submission_User_ID: submission_data.Submission_User_ID,
+                    }
+                })
+            }
+            await prisma.place_Submission.delete({
+                where: {
+                    ID: submission_data.ID
+                }
+            })
+            return 200;
+        } catch (err) {
+            console.error(err)
+            return 400
+        }
+    },
+
 }
 
 export default Mutation;
