@@ -79,6 +79,15 @@ const typeDefs = `#graphql
         Place: Place!
     }
 
+    type Report {
+        ID: ID!
+        Report: String!
+        User_ID: ID!
+        User: User!
+        Place_ID: ID!
+        Place: Place!
+    }
+
     type Query {
         user(ID: ID!): User
         users: [User!]
@@ -93,6 +102,8 @@ const typeDefs = `#graphql
         all_feedback: [FeedBack!]
         check_user_existence(number: String): Int!
         user_by_number(number: String!): User
+        report(ID: ID!): Report
+        reports: [Report!]
     }
 
     type approveSMSResult {
@@ -107,8 +118,8 @@ const typeDefs = `#graphql
         addFeedback(place_id: Int!, rate: Int!, user_id: Int!, comment: Int!, budget_rating: Int!): FeedBack
         sendPlaceAddRequest(title: String!, adress: String!, category_id: Int!, latitude: Float, longitude: Float, submission_user_iD: Int!): Place_Submission
         manageSubmission(place_submission_id: ID!, opened: Boolean, add: Boolean!): Int
-        changeFeedback(Feedback: ID!, user_id: ID!, comment: String, rate: Int, budget_rating: Int)
-        makeReport(place_id: ID!, user_id: ID!, report: String!)
+        changeFeedback(feedback_id: ID!, comment: String, rate: Int, budget_rating: Int): Int
+        makeReport(place_id: ID!, user_id: ID!, report: String!): Int
     }
 `;
 

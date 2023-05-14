@@ -105,6 +105,23 @@ const Query = {
         return prisma.user.findFirst({
             where: { Phone: args.number }
         });
+    },
+    report: (parent, args) => {
+        return prisma.report.findFirst({
+            where: { ID: Number(args.ID) },
+            include: {
+                Place: true,
+                User: true
+            }
+        });
+    },
+    reports: (parent, args) => {
+        return prisma.report.findMany({
+            include: {
+                Place: true,
+                User: true
+            }
+        });
     }
 }
 

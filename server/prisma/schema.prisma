@@ -42,6 +42,7 @@ model Place {
   Feedback            Feedback[]
   Category            Category   @relation(fields: [Category_ID], references: [ID], onUpdate: Restrict, map: "Place_ibfk_1")
   User                User?      @relation(fields: [Submission_User_ID], references: [ID], onDelete: Restrict, onUpdate: Restrict, map: "Place_ibfk_2")
+  Report              Report[]
 
   @@index([Category_ID], map: "Category_ID")
   @@index([Submission_User_ID], map: "Submission User")
@@ -76,6 +77,19 @@ model User {
   Feedback               Feedback[]
   Place                  Place[]
   Place_Submission       Place_Submission[]
+  Report                 Report[]
+}
+
+model Report {
+  ID       Int     @id @default(autoincrement())
+  Place_ID Int
+  User_ID  Int
+  Report   String? @db.VarChar(255)
+  Place    Place   @relation(fields: [Place_ID], references: [ID], onUpdate: Restrict, map: "Report_ibfk_1")
+  User     User    @relation(fields: [User_ID], references: [ID], onUpdate: Restrict, map: "Report_ibfk_2")
+
+  @@index([Place_ID], map: "Place_ID")
+  @@index([User_ID], map: "User_ID")
 }
 
 enum User_Role {

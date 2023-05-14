@@ -126,6 +126,27 @@ const Mutation = {
             return 400
         }
     },
+    changeFeedback: async (parent, args) => {
+        try {
+            const feedback_data = await prisma.feedback.findFirst({
+                where: { ID: Number(args.Feedback_ID) },
+            });
+            await prisma.feedback.update({
+                where: {
+                    ID: args.Feedback_ID,
+                },
+                data: {
+                    Rate: (args.rate) ? args.rate : feedback_data.Rate,
+                    Budget_Rating: (args.budget_rating ? args.budget_rating : feedback_data.Budget_Rating),
+                    Comment: (args.comment ? args.comment : feedback_data.Comment) 
+                }
+            })
+            return 200;
+        } catch (err) {
+            console.error(err)
+            return 500
+        }
+    },
 
 }
 

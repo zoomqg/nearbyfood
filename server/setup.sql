@@ -53,3 +53,12 @@ CREATE TABLE db.Feedback(
     FOREIGN KEY (Place_ID) REFERENCES db.Place(ID),
     FOREIGN KEY (User_ID) REFERENCES db.User(ID)
 );
+
+CREATE TABLE db.Report(
+    ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Place_ID INT NOT NULL,
+    User_ID INT NOT NULL,
+    Report VARCHAR(255)
+    FOREIGN KEY (Place_ID) REFERENCES db.Place(ID),
+    FOREIGN KEY (User_ID) REFERENCES db.User(ID)
+)
