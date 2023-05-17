@@ -75,6 +75,13 @@ export default function MapScreen({ route, navigation } : any) {
   const mapRef = createRef<MapView>();
    
   const [mapDisplays, setMapDisplays] = useState('all');
+
+  const loadMorerationPage = () =>{
+    navigation.navigate("PlaceSubmissionsModeration", {
+      place_submissions: place_submissions
+    })
+  };
+
   const onSearch = () =>{
     setIsSearchVisible(true);
   };
@@ -108,7 +115,8 @@ export default function MapScreen({ route, navigation } : any) {
 
   if (loading) return <Loading />
   if (error) return <Loading />
-  const places = data!.places 
+  const places = data!.places
+  const place_submissions = data!.place_submissions
   let text = 'Waiting..';
   if (errorMsg) {
     text = errorMsg;
@@ -131,7 +139,7 @@ export default function MapScreen({ route, navigation } : any) {
           >
             <MarkersChoise styles={styles} placeArr={places} mapDisplays={mapDisplays} />
           </MapView>
-          { data?.user_by_number.Role == "ADMIN" ? <AdminButton place_submissions={data!.place_submissions} /> : null}
+          { data?.user_by_number.Role == "ADMIN" ? <AdminButton onPress={loadMorerationPage} /> : null}
           <Button label="Search" onPress={onSearch}/>
           <SearchBar isVisible={isSearchVisible} onClose={onSearchClose} setMapDisplays={setMapDisplays} />
         </View>

@@ -3,6 +3,8 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -42,26 +44,39 @@ export type Place = {
   ID: Scalars['ID'];
   Title: Scalars['String'];
   Adress?: Maybe<Scalars['String']>;
-  Category: Category;
+  Category?: Maybe<Category>;
   Category_ID: Scalars['ID'];
   Latitude: Scalars['Float'];
   Longitude: Scalars['Float'];
-  Added_Timestamp: Scalars['String'];
+  Added_Timestamp?: Maybe<Scalars['String']>;
   Requested_Timestamp?: Maybe<Scalars['String']>;
-  Opened: Scalars['Int'];
+  Opened: Scalars['Boolean'];
   Submission_User_ID: Scalars['ID'];
-  User: User;
+  User?: Maybe<User>;
+};
+
+export type Place_Create_Request_Return = {
+  __typename?: 'Place_Create_Request_Return';
+  ID?: Maybe<Scalars['ID']>;
+  Title: Scalars['String'];
+  Adress: Scalars['String'];
+  Latitude: Scalars['Float'];
+  Longitude: Scalars['Float'];
+  Added_Timestamp?: Maybe<Scalars['String']>;
+  Requested_Timestamp?: Maybe<Scalars['String']>;
+  Opened: Scalars['Boolean'];
+  Submission_User_ID?: Maybe<Scalars['ID']>;
 };
 
 export type Place_Submission = {
   __typename?: 'Place_Submission';
   ID: Scalars['ID'];
   Title: Scalars['String'];
-  Adress?: Maybe<Scalars['String']>;
+  Adress: Scalars['String'];
   Category: Category;
   Category_ID: Scalars['ID'];
-  Latitude: Scalars['Float'];
-  Longitude: Scalars['Float'];
+  Latitude?: Maybe<Scalars['Float']>;
+  Longitude?: Maybe<Scalars['Float']>;
   Requested_Timestamp: Scalars['String'];
   Submission_User_ID: Scalars['ID'];
   User: User;
@@ -72,7 +87,17 @@ export type FeedBack = {
   ID: Scalars['ID'];
   Rate: Scalars['Int'];
   Comment?: Maybe<Scalars['String']>;
-  Budget_Rating?: Maybe<Scalars['String']>;
+  Budget_Rating: Scalars['String'];
+  User_ID: Scalars['ID'];
+  User: User;
+  Place_ID: Scalars['ID'];
+  Place: Place;
+};
+
+export type Report = {
+  __typename?: 'Report';
+  ID: Scalars['ID'];
+  Report: Scalars['String'];
   User_ID: Scalars['ID'];
   User: User;
   Place_ID: Scalars['ID'];
@@ -94,6 +119,8 @@ export type Query = {
   all_feedback?: Maybe<Array<FeedBack>>;
   check_user_existence: Scalars['Int'];
   user_by_number?: Maybe<User>;
+  report?: Maybe<Report>;
+  reports?: Maybe<Array<Report>>;
 };
 
 
@@ -136,6 +163,11 @@ export type QueryUser_By_NumberArgs = {
   number: Scalars['String'];
 };
 
+
+export type QueryReportArgs = {
+  ID: Scalars['ID'];
+};
+
 export type ApproveSmsResult = {
   __typename?: 'approveSMSResult';
   existence_check: Scalars['Int'];
@@ -147,6 +179,11 @@ export type Mutation = {
   sendSMS: Scalars['Int'];
   approveSMS: ApproveSmsResult;
   registerUser?: Maybe<User>;
+  addFeedback?: Maybe<FeedBack>;
+  sendPlaceAddRequest?: Maybe<Place_Submission>;
+  manageSubmission?: Maybe<Scalars['Int']>;
+  changeFeedback?: Maybe<Scalars['Int']>;
+  makeReport?: Maybe<Scalars['Int']>;
 };
 
 
@@ -165,4 +202,45 @@ export type MutationRegisterUserArgs = {
   number: Scalars['String'];
   name: Scalars['String'];
   surname: Scalars['String'];
+};
+
+
+export type MutationAddFeedbackArgs = {
+  place_id: Scalars['Int'];
+  rate: Scalars['Int'];
+  user_id: Scalars['Int'];
+  comment: Scalars['Int'];
+  budget_rating: Scalars['Int'];
+};
+
+
+export type MutationSendPlaceAddRequestArgs = {
+  title: Scalars['String'];
+  adress: Scalars['String'];
+  category_id: Scalars['Int'];
+  latitude?: InputMaybe<Scalars['Float']>;
+  longitude?: InputMaybe<Scalars['Float']>;
+  submission_user_iD: Scalars['Int'];
+};
+
+
+export type MutationManageSubmissionArgs = {
+  place_submission_id: Scalars['ID'];
+  opened?: InputMaybe<Scalars['Boolean']>;
+  add: Scalars['Boolean'];
+};
+
+
+export type MutationChangeFeedbackArgs = {
+  feedback_id: Scalars['ID'];
+  comment?: InputMaybe<Scalars['String']>;
+  rate?: InputMaybe<Scalars['Int']>;
+  budget_rating?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type MutationMakeReportArgs = {
+  place_id: Scalars['ID'];
+  user_id: Scalars['ID'];
+  report: Scalars['String'];
 };

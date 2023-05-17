@@ -9,9 +9,10 @@ import MapScreen from "./screens/MapScreen";
 import AuthScreen from "./screens/AuthScreen";
 import VerificationScreen from "./screens/VerificationScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import PlaceSubmissionsModerationScreen from "./screens/SubmissionModerationScreen";
 
 const client = new ApolloClient({
-  uri: 'http://192.168.0.101:4000/graphql',
+  uri: 'http://192.168.93.106:4000/graphql',
   cache: new InMemoryCache()
 });
 const Stack = createNativeStackNavigator();
@@ -43,6 +44,7 @@ export default function App(){
           <Stack.Screen name="Verification" component={VerificationScreen} options={{headerShown: false}}/>
           <Stack.Screen name="Registration" component={RegisterScreen} options={{headerShown: false}}/>
           <Stack.Screen name="Map" component={MapScreen} options={{headerShown: false}}/>
+          <Stack.Screen name="PlaceSubmissionsModeration" component={PlaceSubmissionsModerationScreen} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
