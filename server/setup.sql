@@ -17,7 +17,7 @@ CREATE TABLE db.Category(
 
 CREATE TABLE db.Place(
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    Title VARCHAR(50) NOT NULL,
+    Title VARCHAR(50) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
     Adress VARCHAR(100) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
     Category_ID INT NOT NULL,
     Latitude FLOAT NOT NULL,
@@ -32,11 +32,12 @@ CREATE TABLE db.Place(
 
 CREATE TABLE db.Place_Submission(
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    Title VARCHAR(50) NOT NULL,
+    Title VARCHAR(50) NOT NULL CHARACTER SET utf8 COLLATE utf8_general_ci,
     Adress VARCHAR(255) NOT NULL CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
     Category_ID INT NOT NULL,
     Latitude FLOAT,
     Longitude FLOAT,
+    `Comment` VARCHAR(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
     Submission_User_ID INT,
     Requested_Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (Category_ID) REFERENCES db.Category(ID),

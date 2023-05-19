@@ -66,6 +66,7 @@ const typeDefs = `#graphql
         Requested_Timestamp: String!
         Submission_User_ID: ID!
         User: User!
+        Comment: String
     }
 
     type FeedBack {
@@ -116,7 +117,7 @@ const typeDefs = `#graphql
         approveSMS(number: String!, code: String!) : approveSMSResult!
         registerUser(number: String!, name: String!, surname: String!): User
         addFeedback(place_id: Int!, rate: Int!, user_id: Int!, comment: Int!, budget_rating: Int!): FeedBack
-        sendPlaceAddRequest(title: String!, adress: String!, category_id: Int!, latitude: Float, longitude: Float, submission_user_iD: Int!): Place_Submission
+        sendPlaceAddRequest(title: String!, adress: String!, category_id: Int!, latitude: Float, longitude: Float, submission_user_iD: Int!, comment: String): Place_Submission
         manageSubmission(place_submission_id: ID!, opened: Boolean, add: Boolean!): Int
         changeFeedback(feedback_id: ID!, comment: String, rate: Int, budget_rating: Int): Int
         makeReport(place_id: ID!, user_id: ID!, report: String!): Int

@@ -110,7 +110,7 @@ const Mutation = {
                         Latitude: Number(place_coordinates["lat"]),
                         Longitude: Number(place_coordinates["lng"]),
                         Requested_Timestamp: submission_data.Requested_Timestamp,
-                        Opened: (args.opened) ? args.opened : false,
+                        Opened: (args.opened) ? args.opened : true,
                         Submission_User_ID: submission_data.Submission_User_ID,
                     }
                 })

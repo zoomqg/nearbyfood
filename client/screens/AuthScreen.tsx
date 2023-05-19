@@ -17,7 +17,7 @@ export default function AuthScreen({ navigation } : any) {
 
     const [sendSMS, { error, loading }] = useMutation(SEND_SMS_MUTATION, {
         onCompleted: data => {
-            console.log(data)
+            // console.log(data)
             if (data.sendSMS == 200) {
                 navigation.navigate("Verification", {
                     phoneNumber: phoneNumber

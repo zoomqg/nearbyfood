@@ -57,6 +57,7 @@ model Place_Submission {
   Longitude           Float?   @db.Float
   Requested_Timestamp DateTime @default(now()) @db.Timestamp(0)
   Submission_User_ID  Int?
+  Comment             String?  @db.VarChar(120)
   Category            Category @relation(fields: [Category_ID], references: [ID], onUpdate: Restrict, map: "Place_Submission_ibfk_1")
   User                User?    @relation(fields: [Submission_User_ID], references: [ID], onDelete: Restrict, onUpdate: Restrict, map: "Place_Submission_ibfk_2")
 
