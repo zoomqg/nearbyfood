@@ -1,26 +1,25 @@
 import { Pressable, StyleSheet, Image } from 'react-native';
 import ImageURLS from './ImagesURLs';
-import { Place_Submission } from '../types';
 
 
 
-export default function AdminButton({ onPress }: any){
+export default function SearchButton({ onPress }: any){
     return(
-        <Pressable style={styles.adminbtn} onPress={onPress}>
-            <Image source={ImageURLS.admin_button} style={styles.adminbtn_img} />
+        <Pressable style={styles.searchbtn} onPress={onPress}>
+            <Image source={ImageURLS.search_button} style={styles.searchbtn_img} />
         </Pressable>
     )
 };
 
 const styles = StyleSheet.create({
-    adminbtn: {
+    searchbtn: {
         display: 'flex',
         alignItems: 'flex-start',
         position: 'absolute',
-        marginTop: 12 + 52 + 52,
+        marginTop: 12,
         marginLeft: 12
     },
-    adminbtn_img: {
+    searchbtn_img: {
         width: 44,
         height: 44,
         justifyContent: 'flex-start'

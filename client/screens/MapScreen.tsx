@@ -10,6 +10,8 @@ import SearchBar from '../components/SearchBar';
 import Loading from '../components/Loading';
 import MarkersChoise from '../components/MarkersChoise';
 import AdminButton from '../components/Admin_Button';
+import SearchButton from '../components/Search_Button';
+import AddButton from '../components/Add_Button';
 import { Place, Place_Submission, User } from '../types';
 import { QUERY } from '../gql';
 
@@ -33,6 +35,16 @@ export default function MapScreen({ route, navigation }: any) {
       place_submissions: place_submissions
     });
   };
+
+  const moveToPlaceSubmissionScreen = () =>{
+    navigation.navigate('PlaceSubmissionsScreen', {
+      user_id: user_obj.ID
+    });
+  }
+
+  const moveToSearchScreen = () =>{
+    console.log("test")
+  }
 
   const onSearch = () => {
     setIsSearchVisible(true);
@@ -71,6 +83,7 @@ export default function MapScreen({ route, navigation }: any) {
   }
   const places = data!.places;
   const place_submissions = data!.place_submissions;
+  const user_obj = data!.user_by_number
 
   return (
     <SafeAreaView style={styles.container}>
@@ -90,9 +103,11 @@ export default function MapScreen({ route, navigation }: any) {
         >
           <MarkersChoise styles={styles} placeArr={places} mapDisplays={mapDisplays} />
         </MapView>
+        <SearchButton onPress={moveToSearchScreen} />
+        <AddButton onPress={moveToPlaceSubmissionScreen} />
         {data?.user_by_number.Role === 'ADMIN' && <AdminButton onPress={loadModerationPage} />}
         <Button label="Search" onPress={onSearch} />
-        <SearchBar isVisible={isSearchVisible} onClose={onSearchClose} setMapDisplays={setMapDisplays} />
+        <SearchBar isVisible={isSearchVisible} onClose={onSearchClose} setMapDisplays={setMapDisplays} moveToPlaceSubmissionScreen={moveToPlaceSubmissionScreen}/>
       </View>
     </SafeAreaView>
   );

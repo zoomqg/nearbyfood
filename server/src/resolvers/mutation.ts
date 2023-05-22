@@ -7,7 +7,7 @@ async function geocodePlace(input: string, key: string) {
     const url_string = `https://maps.googleapis.com/maps/api/geocode/json?address=${input}&key=${key}`
     const response = await fetch(url_string);
     const jsonData = await response.json();
-    return(jsonData)
+    return (jsonData)
 }
 
 
@@ -92,7 +92,7 @@ const Mutation = {
             });
             if (args.add) {
                 let geocode_data = await geocodePlace(submission_data.Title + " " + submission_data.Adress, geocode_api_key)
-                
+
                 if (!geocode_data["results"]) {
                     geocode_data = await geocodePlace(submission_data.Adress, geocode_api_key)
                     if (!geocode_data["results"]) {
@@ -138,7 +138,7 @@ const Mutation = {
                 data: {
                     Rate: (args.rate) ? args.rate : feedback_data.Rate,
                     Budget_Rating: (args.budget_rating ? args.budget_rating : feedback_data.Budget_Rating),
-                    Comment: (args.comment ? args.comment : feedback_data.Comment) 
+                    Comment: (args.comment ? args.comment : feedback_data.Comment)
                 }
             })
             return 200;
@@ -147,7 +147,25 @@ const Mutation = {
             return 500
         }
     },
-
+    sendPlaceAddRequest: async (parent, args) => {
+        try {
+            await prisma.place_Submission.create({
+                data: {
+                    Title: args.title,
+                    Adress: args.adress,
+                    Submission_User_ID: args.submission_user_id,
+                    Category_ID: args.category_id,
+                    Latitude: args.latitude || null,
+                    Longitude: args.longitude || null,
+                    Comment: args.comment || "*No comment*"
+                }
+            })
+            return 200;
+        } catch (err) {
+            console.error(err)
+            return 500
+        }
+    },
 }
 
 export default Mutation;

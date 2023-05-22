@@ -33,7 +33,9 @@ const ImageURLS = {
         ['restaurant']: require('../assets/food_icons/icons_with_bg/restaurant.png'),
         ['undefined']: require('../assets/food_icons/icons_with_bg/undefined.png'),
     },
-    admin_button: require("../assets/food_icons/icons_with_bg/admin_button.png"),
+    admin_button: require("../assets/icons/admin_button.png"),
+    search_button: require("../assets/icons/search_icon.png"),
+    add_button: require("../assets/icons/plus_logo.png"),
 };
 
 export default ImageURLS;

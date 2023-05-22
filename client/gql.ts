@@ -88,3 +88,19 @@ export const GET_SUBMISSIONS = gql`
       }
     }
 `;
+
+
+export const CATEGORIES_QUERY = gql`
+ query Place_submissions {
+  categories {
+    ID
+    Category
+  }
+}
+`;
+
+export const SEND_PLACE_MUTATION = gql`
+  mutation SendPlaceAddRequest($title: String!, $adress: String!, $categoryId: Int!, $submissionUserId: Int!) {
+    sendPlaceAddRequest(title: $title, adress: $adress, category_id: $categoryId, submission_user_id: $submissionUserId)
+  }
+`

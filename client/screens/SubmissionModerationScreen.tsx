@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Pressable, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import Loading from '../components/Loading';
-import AdminButtons from '../assets/svgs/AdminButtons';
+import AdminButtonsSvg from '../assets/svgs/AdminButtons';
 import { Place_Submission } from '../types';
 import { PROCESS_SUBMISSION_MUTATION, GET_SUBMISSIONS } from '../gql';
 
@@ -37,7 +37,7 @@ export default function PlaceSubmissionsModerationScreen({ route, navigation }: 
   return (
     <SafeAreaView style={styles.submissioncontainer}>
       <Text style={styles.title_text}>Place submissions</Text>
-      <AdminButtons />
+      <AdminButtonsSvg />
       <View style={styles.description_container}>
         <Text style={styles.description_text}>This is admin panel</Text>
         <Text style={styles.description_text}>Here you can approve / deny place submission</Text>

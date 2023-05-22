@@ -50,7 +50,7 @@ model Place {
 
 model Place_Submission {
   ID                  Int      @id @default(autoincrement())
-  Title               String   @db.VarChar(50)
+  Title               String?  @db.VarChar(50)
   Adress              String   @db.VarChar(255)
   Category_ID         Int
   Latitude            Float?   @db.Float

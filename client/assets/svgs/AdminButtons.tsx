@@ -7,6 +7,6 @@ const xml = `<svg width="143" height="117" viewBox="0 0 143 117" fill="none" xml
 `
 const AdminButtonsElement = () => <SvgXml xml={xml} width="50%" />
 
-export default function AdminButtons(){
+export default function AdminButtonsSvg(){
     return <AdminButtonsElement />
 }

@@ -10,12 +10,17 @@ import AuthScreen from "./screens/AuthScreen";
 import VerificationScreen from "./screens/VerificationScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import PlaceSubmissionsModerationScreen from "./screens/SubmissionModerationScreen";
+import PlaceSubmissionsScreen from "./screens/PlaceSubmissionsScreen";
 
 const client = new ApolloClient({
   uri: 'http://192.168.93.106:4000/graphql',
   cache: new InMemoryCache()
 });
 const Stack = createNativeStackNavigator();
+
+const screenOptions = {
+  headerShown: false
+};
 
 export default function App(){
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
@@ -40,11 +45,12 @@ export default function App(){
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Authentication" component={AuthScreen} options={{headerShown: false}}/>
-          <Stack.Screen name="Verification" component={VerificationScreen} options={{headerShown: false}}/>
-          <Stack.Screen name="Registration" component={RegisterScreen} options={{headerShown: false}}/>
-          <Stack.Screen name="Map" component={MapScreen} options={{headerShown: false}}/>
-          <Stack.Screen name="PlaceSubmissionsModeration" component={PlaceSubmissionsModerationScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="Authentication" component={AuthScreen} options={screenOptions} />
+        <Stack.Screen name="Verification" component={VerificationScreen} options={screenOptions} />
+        <Stack.Screen name="Registration" component={RegisterScreen} options={screenOptions} />
+        <Stack.Screen name="Map" component={MapScreen} options={screenOptions} />
+        <Stack.Screen name="PlaceSubmissionsModeration" component={PlaceSubmissionsModerationScreen} options={screenOptions} />
+        <Stack.Screen name="PlaceSubmissionsScreen" component={PlaceSubmissionsScreen} options={screenOptions} />
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
