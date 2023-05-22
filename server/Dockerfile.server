@@ -1,0 +1,17 @@
+# Using Node.js image
+FROM node:14
+
+# Setting the working directory inside the container
+WORKDIR /app
+
+# Copying all project files into the container
+COPY . .
+
+# Installing dependencies
+RUN npm install
+
+# Executing the prisma generate command to generate Prisma code
+RUN npx prisma generate
+
+# Starting the server when the container starts
+CMD [ "npm", "run", "dev" ]

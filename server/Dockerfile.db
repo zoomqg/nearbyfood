@@ -1,0 +1,5 @@
+# Using MySQL image
+FROM mysql:5.7
+
+# Copying SQL dump into the container
+COPY dbdump.sql /docker-entrypoint-initdb.d/schema.sql
