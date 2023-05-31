@@ -14,13 +14,6 @@ query Query($number: String!) {
     Category_ID
     Latitude
     Longitude
-    Added_Timestamp
-    Requested_Timestamp
-    Opened
-    Submission_User_ID
-    User {
-      Phone
-    }
   }
   user_by_number(number: $number) {
     ID

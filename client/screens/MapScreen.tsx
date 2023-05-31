@@ -43,7 +43,7 @@ export default function MapScreen({ route, navigation }: any) {
   }
 
   const moveToSearchScreen = () =>{
-    console.log("test")
+    navigation.navigate('SearchScreen');
   }
 
   const onSearch = () => {
@@ -106,7 +106,7 @@ export default function MapScreen({ route, navigation }: any) {
         <SearchButton onPress={moveToSearchScreen} />
         <AddButton onPress={moveToPlaceSubmissionScreen} />
         {data?.user_by_number.Role === 'ADMIN' && <AdminButton onPress={loadModerationPage} />}
-        <Button label="Search" onPress={onSearch} />
+        <Button label="Filter" onPress={onSearch} />
         <SearchBar isVisible={isSearchVisible} onClose={onSearchClose} setMapDisplays={setMapDisplays} moveToPlaceSubmissionScreen={moveToPlaceSubmissionScreen}/>
       </View>
     </SafeAreaView>

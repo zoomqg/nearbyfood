@@ -11,9 +11,12 @@ import VerificationScreen from "./screens/VerificationScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import PlaceSubmissionsModerationScreen from "./screens/SubmissionModerationScreen";
 import PlaceSubmissionsScreen from "./screens/PlaceSubmissionsScreen";
+import PlaceScreen from "./screens/PlaceScreen";
+import SearchScreen from "./screens/SearchScreen";
 
 const client = new ApolloClient({
-  uri: 'http://192.168.93.106:4000/graphql',
+  // uri: 'http://192.168.93.106:4000/graphql',
+  uri: 'http://164.92.138.226:4000/graphql',
   cache: new InMemoryCache()
 });
 const Stack = createNativeStackNavigator();
@@ -22,7 +25,7 @@ const screenOptions = {
   headerShown: false
 };
 
-export default function App(){
+export default function App() {
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   useEffect(() => {
@@ -31,9 +34,9 @@ export default function App(){
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
         return;
-        }
-      })();
-    }, []);
+      }
+    })();
+  }, []);
   let text = 'Waiting..';
   if (errorMsg) {
     text = errorMsg;
@@ -41,16 +44,18 @@ export default function App(){
     text = JSON.stringify(location);
   }
 
-  return(
+  return (
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator>
-        <Stack.Screen name="Authentication" component={AuthScreen} options={screenOptions} />
-        <Stack.Screen name="Verification" component={VerificationScreen} options={screenOptions} />
-        <Stack.Screen name="Registration" component={RegisterScreen} options={screenOptions} />
-        <Stack.Screen name="Map" component={MapScreen} options={screenOptions} />
-        <Stack.Screen name="PlaceSubmissionsModeration" component={PlaceSubmissionsModerationScreen} options={screenOptions} />
-        <Stack.Screen name="PlaceSubmissionsScreen" component={PlaceSubmissionsScreen} options={screenOptions} />
+          <Stack.Screen name="Authentication" component={AuthScreen} options={screenOptions} />
+          <Stack.Screen name="Verification" component={VerificationScreen} options={screenOptions} />
+          <Stack.Screen name="Registration" component={RegisterScreen} options={screenOptions} />
+          <Stack.Screen name="Map" component={MapScreen} options={screenOptions} />
+          <Stack.Screen name="PlaceSubmissionsModeration" component={PlaceSubmissionsModerationScreen} options={screenOptions} />
+          <Stack.Screen name="PlaceSubmissionsScreen" component={PlaceSubmissionsScreen} options={screenOptions} />
+          <Stack.Screen name="PlaceScreen" component={PlaceScreen} options={screenOptions} />
+          <Stack.Screen name="SearchScreen" component={SearchScreen} options={screenOptions} />
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>

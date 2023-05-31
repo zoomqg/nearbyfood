@@ -46,7 +46,7 @@ export default function AuthScreen({ navigation } : any) {
     return(
         <SafeAreaView style={styles.container}>
             <Text style={styles.login_text}>Log in / Sign up</Text>
-            <TextInput style={styles.input} placeholder="Phone Number" onChangeText={(number) => setPhoneNumber(number)} value={phoneNumber} keyboardType={'number-pad'}/>
+            <TextInput style={styles.input} placeholder="Phone Number" onChangeText={(number) => setPhoneNumber(number)} value={phoneNumber} keyboardType={'phone-pad'}/>
             <Pressable style={styles.btn} onPress={() => phone_input()} >
                 <Text style={styles.btn_text}>SUBMIT</Text>
             </Pressable>
