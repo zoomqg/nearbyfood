@@ -16,7 +16,7 @@ import SearchScreen from "./screens/SearchScreen";
 
 const client = new ApolloClient({
   // uri: 'http://192.168.93.106:4000/graphql',
-  uri: 'http://164.92.138.226:4000/graphql',
+  uri: process.env.GRAPHQL_ADRESS as string,
   cache: new InMemoryCache()
 });
 const Stack = createNativeStackNavigator();
