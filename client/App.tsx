@@ -13,10 +13,12 @@ import PlaceSubmissionsModerationScreen from "./screens/SubmissionModerationScre
 import PlaceSubmissionsScreen from "./screens/PlaceSubmissionsScreen";
 import PlaceScreen from "./screens/PlaceScreen";
 import SearchScreen from "./screens/SearchScreen";
+import { GRAPHQL_ADRESS } from "./constants";
+
+console.log(GRAPHQL_ADRESS)
 
 const client = new ApolloClient({
-  // uri: 'http://192.168.93.106:4000/graphql',
-  uri: process.env.GRAPHQL_ADRESS as string,
+  uri: GRAPHQL_ADRESS,
   cache: new InMemoryCache()
 });
 const Stack = createNativeStackNavigator();
