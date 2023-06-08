@@ -6,7 +6,7 @@ import MapView from 'react-native-maps';
 import * as Location from 'expo-location';
 
 import Button from '../components/Button';
-import SearchBar from '../components/SearchBar';
+import FilterBar from '../components/FilterBar';
 import Loading from '../components/Loading';
 import MarkersChoise from '../components/MarkersChoise';
 import AdminButton from '../components/Admin_Button';
@@ -107,7 +107,7 @@ export default function MapScreen({ route, navigation }: any) {
         <AddButton onPress={moveToPlaceSubmissionScreen} />
         {data?.user_by_number.Role === 'ADMIN' && <AdminButton onPress={loadModerationPage} />}
         <Button label="Filter" onPress={onSearch} />
-        <SearchBar isVisible={isSearchVisible} onClose={onSearchClose} setMapDisplays={setMapDisplays} moveToPlaceSubmissionScreen={moveToPlaceSubmissionScreen}/>
+        <FilterBar isVisible={isSearchVisible} onClose={onSearchClose} setMapDisplays={setMapDisplays} moveToPlaceSubmissionScreen={moveToPlaceSubmissionScreen}/>
       </View>
     </SafeAreaView>
   );
@@ -119,6 +119,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
   },
   map: {
     width: Dimensions.get('window').width,

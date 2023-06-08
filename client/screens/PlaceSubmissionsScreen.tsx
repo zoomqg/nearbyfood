@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Pressable, SafeAreaView, TextInput, ScrollView, Alert } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, SafeAreaView, TextInput, ScrollView, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import CloshSvg from '../assets/svgs/Closh';
 import Button from '../components/Button';
@@ -75,6 +75,7 @@ export default function PlaceSubmissionsScreen({ route, navigation }: any) {
                 <View style={styles.value_inputs}>
                     <View style={[styles.select_box, categoryError && styles.error]}>
                         <Picker
+                            itemStyle={{height:50}}
                             style={{ color: "#1C2439" }}
                             selectedValue={selectedCategory}
                             onValueChange={(itemValue) => {
@@ -103,7 +104,7 @@ export default function PlaceSubmissionsScreen({ route, navigation }: any) {
                     <TextInput
                         style={[styles.input_boxes, adressError && styles.error]}
                         placeholderTextColor="#1C2439"
-                        placeholder="Adress"
+                        placeholder="Address"
                         value={adress}
                         onChangeText={setAdress}
                         onFocus={() => setAdressError(false)}
@@ -130,6 +131,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
+        paddingTop: 44
     },
     contentContainer: {
         flexGrow: 1,
@@ -147,7 +149,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     input_boxes: {
-        width: 320,
         height: 64,
         backgroundColor: "#F1F4FA",
         borderRadius: 8,
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     select_box: {
-        width: 320,
+        width: Dimensions.get('window').width - 40,
         height: 64,
         backgroundColor: "#F1F4FA",
         borderRadius: 8,
@@ -166,13 +167,14 @@ const styles = StyleSheet.create({
     },
     value_inputs: {
         marginTop: 32,
-        maxWidth: 320,
+        // maxWidth: 320,
     },
     comment: {
         height: 140,
         textAlignVertical: 'top',
         paddingTop: 16,
-        paddingRight: 4
+        paddingRight: 4,
+        marginBottom: 84
     },
     error: {
         borderColor: 'red',

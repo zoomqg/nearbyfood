@@ -35,12 +35,14 @@ export default function PlaceSubmissionsModerationScreen({ route, navigation }: 
   };
 
   return (
-    <SafeAreaView style={styles.submissioncontainer}>
-      <Text style={styles.title_text}>Place submissions</Text>
-      <AdminButtonsSvg />
-      <View style={styles.description_container}>
-        <Text style={styles.description_text}>This is admin panel</Text>
-        <Text style={styles.description_text}>Here you can approve / deny place submission</Text>
+    <SafeAreaView style={styles.area_container}>
+      <View style={styles.info_box}>
+        <Text style={styles.title_text}>Place submissions</Text>
+        <AdminButtonsSvg />
+        <View style={styles.description_container}>
+          <Text style={styles.description_text}>This is admin panel</Text>
+          <Text style={styles.description_text}>Here you can approve / deny place submission</Text>
+        </View>
       </View>
       <ScrollView style={styles.submissions_container}>
         {place_submissions.map((submission: Place_Submission, index: number) => (
@@ -68,12 +70,16 @@ export default function PlaceSubmissionsModerationScreen({ route, navigation }: 
 }
 
 const styles = StyleSheet.create({
-  submissioncontainer: {
+  info_box: { 
+    alignItems: 'center',
+    paddingTop: 44
+  },
+  area_container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
+    paddingHorizontal: 20
   },
   title_text: {
     fontWeight: '500',
@@ -85,7 +91,6 @@ const styles = StyleSheet.create({
   },
   submission_container: {
     marginTop: 16,
-    width: 340,
     maxHeight: 300,
     borderColor: '#f0eeeb',
     borderRadius: 10,
@@ -106,7 +111,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   submissions_container: {
-    maxHeight: 400,
+    marginBottom: 10
   },
   adress: {
     fontWeight: '400',
@@ -130,7 +135,6 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
   },
   input: {
-    width: 324,
     height: 52,
     margin: 12,
     borderWidth: 1,
@@ -143,7 +147,7 @@ const styles = StyleSheet.create({
   approve_button: {
     backgroundColor: '#0B79D0',
     borderRadius: 8,
-    width: 140,
+    width: "45%",
     height: 56,
     alignItems: 'center',
     justifyContent: 'center',
@@ -152,7 +156,7 @@ const styles = StyleSheet.create({
     borderColor: '#0B79D0',
     borderRadius: 10,
     borderWidth: 2,
-    width: 140,
+    width: "45%",
     height: 56,
     alignItems: 'center',
     justifyContent: 'center',

@@ -74,9 +74,8 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      paddingLeft: 24,
-      paddingRight: 24,
       justifyContent: 'center',
+      paddingHorizontal: 40
     },
     header_text: {
         fontWeight: '600',
@@ -101,7 +100,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     input: {
-        width: 324,
+        width: "100%",
         height: 52,
         margin: 12,
         borderWidth: 1,
@@ -115,7 +114,7 @@ const styles = StyleSheet.create({
         marginTop: 12,
         backgroundColor: "#5D5FEF",
         borderRadius: 8,
-        width: 320,
+        width: "100%",
         height: 56,
         alignItems: 'center',
         justifyContent: 'center',

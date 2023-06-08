@@ -1,9 +1,9 @@
 import { Modal, View, Pressable, StyleSheet, Image, Dimensions } from 'react-native';
 import GestureRecognizer from 'react-native-swipe-gestures';
-import IconsList from '../components/IconsList';
+import IconsList from './IconsList';
 import Button from './Button';
 
-export default function SearchBar({ isVisible, onClose, setMapDisplays, moveToPlaceSubmissionScreen }: any) {
+export default function FilterBar({ isVisible, onClose, setMapDisplays, moveToPlaceSubmissionScreen }: any) {
   const setPickedIcon = (item: any) => {
     setMapDisplays(item);
   };
@@ -19,10 +19,6 @@ export default function SearchBar({ isVisible, onClose, setMapDisplays, moveToPl
             <Image source={require('../assets/searchbar/line.png')} style={styles.lineImage} />
           </View>
           <IconsList onSelect={setPickedIcon} onCloseModal={onClose} />
-          <Pressable onPress={(item) => setPickedIcon(item)}>
-            <Image source={require('../assets/searchbar/Searchbar.png')} style={styles.searchImg} />
-          </Pressable>
-          <Button label="Add new place" onPress={moveToPlaceSubmissionScreen} />
         </View>
       </Modal>
     </GestureRecognizer>
@@ -33,7 +29,7 @@ const styles = StyleSheet.create({
   modalContent: {
     paddingLeft: 28,
     paddingRight: 28,
-    height: '36%',
+    height: '15%',
     width: '100%',
     backgroundColor: '#FFFFFF',
     borderTopRightRadius: 18,
