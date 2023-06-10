@@ -18,27 +18,65 @@ const Query = {
             }
         });
     },
-    places: (parent, args) => {
-        return prisma.place.findMany({
+    places: async (parent, args) => {
+        const places = await prisma.place.findMany({
             include: {
                 Category: true,
-                User: true
-            }
+                User: true,
+                Feedback: {
+                    select: {
+                        Rate: true,
+                        Budget_Rating: true
+                    },
+                },
+            },
         });
+
+        const placesWithAvgRating = places.map((place) => {
+            const rates = place.Feedback.map((feedback) => feedback.Rate);
+            const avg_rates =
+                rates.reduce((total, rating) => total + rating, 0) / rates.length;
+            const Avg_Rating = isNaN(avg_rates) ? null : avg_rates;
+
+            const budget_rates = place.Feedback.map((feedback) => feedback.Budget_Rating);
+            const avg_budget_rates =
+                budget_rates.reduce((total, rating) => total + rating, 0) / budget_rates.length;
+            const Avg_Budget_Rating = isNaN(avg_budget_rates) ? null : avg_budget_rates;
+
+            return {
+                ...place,
+                Avg_Rating,
+                Avg_Budget_Rating
+            };
+        });
+        return placesWithAvgRating;
     },
     places_by_category: (parent, args) => {
         return prisma.place.findMany({
             where: {
-              Category: {
-                Category : {
-                  contains: String(args.Category)
+                Category: {
+                    Category: {
+                        contains: String(args.Category)
+                    }
                 }
-              }
             },
             include: {
-              Category: true
+                Category: true
             }
-          });
+        });
+    },
+    places_by_name: (parent, args) => {
+        return prisma.place.findMany({
+            include: {
+                Category: true,
+                User: true
+            },
+            where: {
+                Title: {
+                    contains: String(args.search_value)
+                }
+            }
+        });
     },
     category: (parent, args) => {
         return prisma.category.findFirst({
@@ -72,6 +110,20 @@ const Query = {
                     }
                 },
                 User: true
+            }
+        });
+    },
+    feedback_for_place: (parent, args) => {
+        return prisma.feedback.findMany({
+            where: { Place_ID: Number(args.place_id) },
+            include: {
+                Place: {
+                    include: {
+                        Category: true,
+                        User: true
+                    }
+                },
+                User: true,
             }
         });
     },
@@ -122,7 +174,7 @@ const Query = {
                 User: true
             }
         });
-    }
+    },
 }
 
 export default Query;

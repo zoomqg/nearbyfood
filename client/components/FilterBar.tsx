@@ -1,7 +1,6 @@
 import { Modal, View, Pressable, StyleSheet, Image, Dimensions } from 'react-native';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import IconsList from './IconsList';
-import Button from './Button';
 
 export default function FilterBar({ isVisible, onClose, setMapDisplays, moveToPlaceSubmissionScreen }: any) {
   const setPickedIcon = (item: any) => {

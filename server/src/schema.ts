@@ -40,6 +40,8 @@ const typeDefs = `#graphql
         Opened: Boolean!
         Submission_User_ID: ID!
         User: User
+        Avg_Rating: Float
+        Avg_Budget_Rating: Float
         # All_FeedBack: [FeedBack]
     }
 
@@ -105,6 +107,9 @@ const typeDefs = `#graphql
         user_by_number(number: String!): User
         report(ID: ID!): Report
         reports: [Report!]
+        places_by_name(search_value: String!): [Place]
+        feedback_for_place(place_id: ID!): [FeedBack]
+        get_avg_rating(place_id: ID!): Int
     }
 
     type approveSMSResult {
@@ -119,7 +124,7 @@ const typeDefs = `#graphql
         addFeedback(place_id: Int!, rate: Int!, user_id: Int!, comment: Int!, budget_rating: Int!): FeedBack
         sendPlaceAddRequest(title: String!, adress: String!, category_id: Int!, latitude: Float, longitude: Float, submission_user_id: Int!, comment: String): Int
         manageSubmission(place_submission_id: ID!, opened: Boolean, add: Boolean!): Int
-        changeFeedback(feedback_id: ID!, comment: String, rate: Int, budget_rating: Int): Int
+        changeFeedback(feedback_id: ID!, user_id: ID!, comment: String, rate: Int, budget_rating: Int): Int
         makeReport(place_id: ID!, user_id: ID!, report: String!): Int
     }
 `;

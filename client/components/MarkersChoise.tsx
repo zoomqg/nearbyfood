@@ -15,7 +15,9 @@ const MarkersChoise: React.FC<MarkersChoiseProps> = ({ styles, placeArr, mapDisp
   const navigation = useNavigation();
 
   const navigateToOtherScreen = (place: Place) => {
-    navigation.navigate('PlaceScreen', { place });
+    navigation.navigate('PlaceScreen', {
+      place: place
+    });
   };
 
   const filteredPlaces = mapDisplays === 'all' ? placeArr : placeArr.filter((place) => place.Category.Category === mapDisplays);
@@ -52,7 +54,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.46,
     shadowRadius: 11.14,
-    elevation: 17,
     height: 28,
     width: 28,
   },

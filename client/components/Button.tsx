@@ -12,7 +12,7 @@ export default function Button({ label, onPress }: any) {
 
 const styles = StyleSheet.create({
     buttonContainer: {
-        width: Dimensions.get('screen').width,
+        width: Dimensions.get('window').width,
         paddingLeft: 30,
         paddingRight: 30,
         height: 56,

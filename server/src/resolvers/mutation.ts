@@ -131,6 +131,9 @@ const Mutation = {
             const feedback_data = await prisma.feedback.findFirst({
                 where: { ID: Number(args.Feedback_ID) },
             });
+            if (feedback_data.User_ID != args.user_id) {
+                return 400
+            }
             await prisma.feedback.update({
                 where: {
                     ID: args.Feedback_ID,

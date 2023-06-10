@@ -2,8 +2,6 @@ CREATE TABLE db.User (
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `Name` VARCHAR(20) NOT NULL,
     Surname VARCHAR(20) NOT NULL,
-    `Login` VARCHAR(20),
-    `Password` VARCHAR(20),
     Phone VARCHAR(15) NOT NULL,
     Email VARCHAR(50),
     Registration_Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
