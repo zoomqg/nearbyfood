@@ -129,14 +129,14 @@ const Mutation = {
     changeFeedback: async (parent, args) => {
         try {
             const feedback_data = await prisma.feedback.findFirst({
-                where: { ID: Number(args.Feedback_ID) },
+                where: { ID: Number(args.feedback_id) },
             });
             if (feedback_data.User_ID != args.user_id) {
                 return 400
             }
             await prisma.feedback.update({
                 where: {
-                    ID: args.Feedback_ID,
+                    ID: args.feedback_id,
                 },
                 data: {
                     Rate: (args.rate) ? args.rate : feedback_data.Rate,
