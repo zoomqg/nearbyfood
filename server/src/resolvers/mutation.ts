@@ -169,6 +169,21 @@ const Mutation = {
             return 500
         }
     },
+    makeReport: async (parent, args) => {
+        try {
+            await prisma.report.create({
+                data: {
+                    Place_ID: args.place_id,
+                    User_ID: args.user_id,
+                    Report: args.report
+                }
+            })
+            return 200;
+        } catch (err) {
+            console.error(err)
+            return 500
+        }
+    },
 }
 
 export default Mutation;
