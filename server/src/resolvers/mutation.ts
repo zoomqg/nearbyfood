@@ -173,12 +173,8 @@ const Mutation = {
         try {
             await prisma.report.create({
                 data: {
-                    Place: {
-                        connect: { ID: args.place_id }
-                    },
-                    User: {
-                        connect: { ID: args.user_id }
-                    },
+                    Place_ID: parseInt(args.place_id),
+                    User_ID: parseInt(args.user_id),
                     Report: args.report
                 }
             })
