@@ -6,6 +6,15 @@ import Edit from '../components/EditingFeedback';
 import Info from '../components/PlaceInfo';
 import ImageURLS from "../components/ImagesURLs";
 import { Place } from "../types";
+import { GET_FEEDBACK_FOR_PLACE } from "../gql";
+import { useMutation, useQuery } from '@apollo/client';
+import Loading from "../components/Loading";
+import { FeedBack } from "../types";
+
+
+type QueryReturns = {
+  feedback_for_place: FeedBack[];
+};
 
 type RouteReturns = {
   place: Place;
@@ -14,14 +23,26 @@ type RouteReturns = {
 
 export default function PlaceScreen({ route, navigation }: any) {
   const { place, user_id }: RouteReturns = route.params;
+  const { loading: queryLoading, error: queryError, data, refetch } = useQuery<QueryReturns>(GET_FEEDBACK_FOR_PLACE, {
+    variables: {
+      placeId: place.ID
+    }
+  });
+  const handleRefetch = () => {
+    refetch();
+  };
+  if (queryLoading || queryError) {
+    return <Loading />;
+  }
+  const feedback_arr = data!.feedback_for_place;
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imgContainer}>
         <Image source={ImageURLS.without_shadow[place.Category!.Category as keyof typeof ImageURLS.without_shadow]} style={styles.imgBorder} />
       </View>
       <Swiper loop={false}>
-        <Info place={place} user_id={user_id}/>
-        <Edit user_id={user_id} label={"Leave feedback"} place_id={parseInt(place.ID)} />
+        <Info place={place} user_id={user_id} feedback_arr={feedback_arr} />
+        <Edit user_id={user_id} label={"Leave feedback"} place_id={parseInt(place.ID)} onSuccess={handleRefetch} />
       </Swiper>
       <StatusBar style='auto' />
     </SafeAreaView>

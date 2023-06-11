@@ -3,7 +3,7 @@ import StarSvg from '../assets/svgs/Star';
 import PriceSvg from '../assets/svgs/Price';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { SEND_NEW_FEEDBACK, EDIT_FEEDBACK, GET_FEEDBACK_FOR_PLACE } from '../gql';
+import { SEND_NEW_FEEDBACK, EDIT_FEEDBACK } from '../gql';
 
 type CommentType = {
   user_id: number;

@@ -8,25 +8,21 @@ import ManSvg from '../assets/svgs/Man';
 import Comment from './CommentBlock';
 import BackSvg from '../assets/svgs/Back';
 import { useState } from 'react';
-import { Place, FeedBack } from '../types';
+import { FeedBack, Place } from '../types';
 import Button from './Button';
-import { SEND_REPORT_MUTATION, GET_FEEDBACK_FOR_PLACE } from '../gql';
+import { SEND_REPORT_MUTATION, } from '../gql';
 import { useMutation, useQuery } from '@apollo/client';
 import * as Linking from 'expo-linking';
-import Loading from './Loading';
 
 
 
 type InfoType = {
   place: Place,
-  user_id: number
+  user_id: number,
+  feedback_arr: FeedBack[]
 }
 
-type QueryReturns = {
-  feedback_for_place: FeedBack[];
-};
-
-export default function Info({ place, user_id }: InfoType) {
+export default function Info({ place, user_id, feedback_arr }: InfoType) {
   const [showMore, setShowMore] = useState(false);
   const [isReportModalVisible, setReportModalVisible] = useState(false);
   const [reportText, setReportText] = useState('');
@@ -88,18 +84,6 @@ export default function Info({ place, user_id }: InfoType) {
     const url_param = place.Latitude + "+" + place.Longitude;
     Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${url_param.replaceAll(" ", "+")}`);
   };
-
-  const { loading: queryLoading, error: queryError, data } = useQuery<QueryReturns>(GET_FEEDBACK_FOR_PLACE, {
-    variables: {
-      placeId: place.ID
-    }
-  });
-
-  if (queryLoading) {
-    return <Loading />;
-  }
-
-  const feedback_arr = data!.feedback_for_place;
   return (
     <View style={styles.component}>
       <View style={styles.input}>
