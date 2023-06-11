@@ -75,7 +75,7 @@ const typeDefs = `#graphql
         ID: ID!
         Rate: Int!
         Comment: String
-        Budget_Rating: String!
+        Budget_Rating: Int!
         User_ID: ID!
         User: User!
         Place_ID: ID!
