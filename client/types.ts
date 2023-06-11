@@ -53,6 +53,8 @@ export type Place = {
   Opened: Scalars['Boolean']['output'];
   Submission_User_ID: Scalars['ID']['output'];
   User?: Maybe<User>;
+  Avg_Rating?: Maybe<Scalars['Float']['output']>;
+  Avg_Budget_Rating?: Maybe<Scalars['Float']['output']>;
 };
 
 export type Place_Create_Request_Return = {
@@ -88,7 +90,7 @@ export type FeedBack = {
   ID: Scalars['ID']['output'];
   Rate: Scalars['Int']['output'];
   Comment?: Maybe<Scalars['String']['output']>;
-  Budget_Rating: Scalars['String']['output'];
+  Budget_Rating: Scalars['Int']['output'];
   User_ID: Scalars['ID']['output'];
   User: User;
   Place_ID: Scalars['ID']['output'];
@@ -122,6 +124,9 @@ export type Query = {
   user_by_number?: Maybe<User>;
   report?: Maybe<Report>;
   reports?: Maybe<Array<Report>>;
+  places_by_name?: Maybe<Array<Maybe<Place>>>;
+  feedback_for_place?: Maybe<Array<Maybe<FeedBack>>>;
+  get_avg_rating?: Maybe<Scalars['Int']['output']>;
 };
 
 
@@ -169,6 +174,21 @@ export type QueryReportArgs = {
   ID: Scalars['ID']['input'];
 };
 
+
+export type QueryPlaces_By_NameArgs = {
+  search_value: Scalars['String']['input'];
+};
+
+
+export type QueryFeedback_For_PlaceArgs = {
+  place_id: Scalars['ID']['input'];
+};
+
+
+export type QueryGet_Avg_RatingArgs = {
+  place_id: Scalars['ID']['input'];
+};
+
 export type ApproveSmsResult = {
   __typename?: 'approveSMSResult';
   existence_check: Scalars['Int']['output'];
@@ -181,7 +201,7 @@ export type Mutation = {
   approveSMS: ApproveSmsResult;
   registerUser?: Maybe<User>;
   addFeedback?: Maybe<FeedBack>;
-  sendPlaceAddRequest?: Maybe<Place_Submission>;
+  sendPlaceAddRequest?: Maybe<Scalars['Int']['output']>;
   manageSubmission?: Maybe<Scalars['Int']['output']>;
   changeFeedback?: Maybe<Scalars['Int']['output']>;
   makeReport?: Maybe<Scalars['Int']['output']>;
@@ -221,7 +241,7 @@ export type MutationSendPlaceAddRequestArgs = {
   category_id: Scalars['Int']['input'];
   latitude?: InputMaybe<Scalars['Float']['input']>;
   longitude?: InputMaybe<Scalars['Float']['input']>;
-  submission_user_iD: Scalars['Int']['input'];
+  submission_user_id: Scalars['Int']['input'];
   comment?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -235,6 +255,7 @@ export type MutationManageSubmissionArgs = {
 
 export type MutationChangeFeedbackArgs = {
   feedback_id: Scalars['ID']['input'];
+  user_id: Scalars['ID']['input'];
   comment?: InputMaybe<Scalars['String']['input']>;
   rate?: InputMaybe<Scalars['Int']['input']>;
   budget_rating?: InputMaybe<Scalars['Int']['input']>;

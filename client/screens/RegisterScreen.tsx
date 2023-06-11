@@ -48,8 +48,8 @@ export default function RegisterScreen({ route, navigation }: any){
         <SafeAreaView style={styles.regcontainer}>
             <Text style={styles.login_text}>Looks like you are new here!</Text>
             <Text style={styles.login_text}>Could you give me more info about you?</Text>
-            <TextInput style={styles.input} placeholder="Name" onChangeText={(name) => setName(name)} value={name} />
-            <TextInput style={styles.input} placeholder="Surname" onChangeText={(surname) => setSurname(surname)} value={surname} />
+            <TextInput style={styles.input} placeholder="Name" onChangeText={(name) => setName(name)} value={name} maxLength={20} />
+            <TextInput style={styles.input} placeholder="Surname" onChangeText={(surname) => setSurname(surname)} value={surname} maxLength={20} />
             <Pressable style={styles.btn} onPress={() => precessRegistration()} >
                 <Text style={styles.btn_text}>SUBMIT</Text>
             </Pressable>

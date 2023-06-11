@@ -2,32 +2,41 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import MiniStarSvg from '../assets/svgs/MiniStar';
 import MiniPriceSvg from '../assets/svgs/MiniPrice';
 import PencilSvg from '../assets/svgs/Pencil';
-import TrashSvg from '../assets/svgs/Trash';
+import { FeedBack } from '../types';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Comment() {
-  let canEdit = true;
+type CommentType = {
+  feedback: FeedBack;
+  user_id: number;
+}
 
+export default function Comment({feedback, user_id}: CommentType) {
+  const navigation = useNavigation();
+  let canEdit = parseInt(feedback.User_ID) === parseInt(user_id);
+  const navigateToOtherScreen = () => {
+    navigation.navigate("EditCommentScreen", {
+      feedback_id: feedback.ID,
+      user_id: user_id,
+    });
+  };
   return (
     <View style={styles.comment}>
       <View style={styles.titleBar}>
-        <Text>Misha Bender:</Text>
+        <Text>{feedback.User.Name + " " + feedback.User.Surname}</Text>
         <View style={styles.icons}>
           <MiniStarSvg />
-          <Text>4.0</Text>
+          <Text>{feedback.Rate.toFixed(1)}</Text>
           <MiniPriceSvg />
-          <Text>4.0</Text>
+          <Text>{feedback.Budget_Rating.toFixed(1)}</Text>
         </View>
       </View>
       <View style={styles.commentBlock}>
-        <Text style={canEdit && { width: '90%' }}>so cool, i like heavy druuuugs</Text>
+        <Text style={canEdit && { width: '90%' }}>{feedback.Comment ? feedback.Comment : "*no comment*"}</Text>
         {
           canEdit &&
           <View style={styles.icons}>
-            <Pressable>
+            <Pressable onPress={navigateToOtherScreen}>
               <PencilSvg />
-            </Pressable>
-            <Pressable>
-              <TrashSvg />
             </Pressable>
           </View>
         }

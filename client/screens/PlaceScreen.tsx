@@ -2,26 +2,26 @@ import React from "react";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
-import Edit from '../components/Edit';
-import Info from '../components/Info';
+import Edit from '../components/EditingFeedback';
+import Info from '../components/PlaceInfo';
 import ImageURLS from "../components/ImagesURLs";
 import { Place } from "../types";
 
 type RouteReturns = {
-  place: Place
+  place: Place;
+  user_id: number;
 }
 
 export default function PlaceScreen({ route, navigation }: any) {
-  const { place }: RouteReturns = route.params;
-  console.log(place)
+  const { place, user_id }: RouteReturns = route.params;
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imgContainer}>
         <Image source={ImageURLS.without_shadow[place.Category!.Category as keyof typeof ImageURLS.without_shadow]} style={styles.imgBorder} />
       </View>
       <Swiper loop={false}>
-        <Info />
-        <Edit />
+        <Info place={place} user_id={user_id}/>
+        <Edit user_id={user_id} label={"Leave feedback"} place_id={parseInt(place.ID)} />
       </Swiper>
       <StatusBar style='auto' />
     </SafeAreaView>

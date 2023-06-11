@@ -13,9 +13,8 @@ import PlaceSubmissionsModerationScreen from "./screens/SubmissionModerationScre
 import PlaceSubmissionsScreen from "./screens/PlaceSubmissionsScreen";
 import PlaceScreen from "./screens/PlaceScreen";
 import SearchScreen from "./screens/SearchScreen";
+import EditCommentScreen from "./screens/EditCommentScreen";
 import { GRAPHQL_ADRESS } from "./constants";
-
-console.log(GRAPHQL_ADRESS)
 
 const client = new ApolloClient({
   uri: GRAPHQL_ADRESS,
@@ -58,6 +57,7 @@ export default function App() {
           <Stack.Screen name="PlaceSubmissionsScreen" component={PlaceSubmissionsScreen} options={screenOptions} />
           <Stack.Screen name="PlaceScreen" component={PlaceScreen} options={screenOptions} />
           <Stack.Screen name="SearchScreen" component={SearchScreen} options={screenOptions} />
+          <Stack.Screen name="EditCommentScreen" component={EditCommentScreen} options={screenOptions} />
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>

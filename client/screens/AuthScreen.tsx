@@ -59,6 +59,7 @@ export default function AuthScreen({ navigation }: any) {
         onFocus={handleTextInputFocus}
         value={phoneNumber}
         keyboardType={'phone-pad'}
+        maxLength={15}
       />
       <Pressable style={styles.btn} onPress={() => phone_input()}>
         <Text style={styles.btn_text}>SUBMIT</Text>

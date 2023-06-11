@@ -61,7 +61,7 @@ export default function VerificationScreen({ route, navigation } : any) {
                 <Text style={styles.h2_number}> {phoneNumber} </Text>
             </Text>
             <View style={styles.input_container}>
-                <TextInput style={styles.input} placeholder="Code" onChangeText={(text) => setText(text)} value={text} keyboardType={'number-pad'}/>
+                <TextInput style={styles.input} placeholder="Code" onChangeText={(text) => setText(text)} value={text} keyboardType={'number-pad'} maxLength={10} />
                 <Pressable style={styles.btn} onPress={() => verifyNumber()} >
                     <Text style={styles.btn_text}>SUBMIT</Text>
                 </Pressable>

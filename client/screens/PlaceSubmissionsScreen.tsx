@@ -53,7 +53,6 @@ export default function PlaceSubmissionsScreen({ route, navigation }: any) {
             setAdressError(true);
         }
         if (selectedCategory !== '' && name.trim() !== '' && adress.trim() !== '') {
-            console.log(name, adress, comment, selectedCategory);
             sendPlaceMutation({
                 variables: {
                     submissionUserId: parseInt(user_id),
@@ -100,6 +99,7 @@ export default function PlaceSubmissionsScreen({ route, navigation }: any) {
                         value={name}
                         onChangeText={setName}
                         onFocus={() => setNameError(false)}
+                        maxLength={50}
                     />
                     <TextInput
                         style={[styles.input_boxes, adressError && styles.error]}
@@ -108,6 +108,7 @@ export default function PlaceSubmissionsScreen({ route, navigation }: any) {
                         value={adress}
                         onChangeText={setAdress}
                         onFocus={() => setAdressError(false)}
+                        maxLength={255}
                     />
                     <TextInput
                         style={[styles.input_boxes, styles.comment]}
@@ -116,6 +117,7 @@ export default function PlaceSubmissionsScreen({ route, navigation }: any) {
                         multiline={true}
                         value={comment}
                         onChangeText={setComment}
+                        maxLength={120}
                     />
                 </View>
                 <Button label="Request" onPress={validateAndPush} />

@@ -9,14 +9,16 @@ type MarkersChoiseProps = {
   styles: any;
   placeArr: Place[];
   mapDisplays: string;
+  user_id: number
 };
 
-const MarkersChoise: React.FC<MarkersChoiseProps> = ({ styles, placeArr, mapDisplays }) => {
+const MarkersChoise: React.FC<MarkersChoiseProps> = ({ styles, placeArr, mapDisplays, user_id }) => {
   const navigation = useNavigation();
 
   const navigateToOtherScreen = (place: Place) => {
     navigation.navigate('PlaceScreen', {
-      place: place
+      place: place,
+      user_id: user_id
     });
   };
 

@@ -101,7 +101,7 @@ export default function MapScreen({ route, navigation }: any) {
           showsMyLocationButton={true}
           mapPadding={{ bottom: 60, top: 0, right: 0, left: 0 }}
         >
-          <MarkersChoise styles={styles} placeArr={places} mapDisplays={mapDisplays} />
+          <MarkersChoise styles={styles} placeArr={places} mapDisplays={mapDisplays} user_id={parseInt(user_obj.ID)} />
         </MapView>
         <SearchButton onPress={moveToSearchScreen} />
         <AddButton onPress={moveToPlaceSubmissionScreen} />
