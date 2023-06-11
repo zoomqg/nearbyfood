@@ -121,7 +121,7 @@ const typeDefs = `#graphql
         sendSMS(number: String!) : Int!
         approveSMS(number: String!, code: String!) : approveSMSResult!
         registerUser(number: String!, name: String!, surname: String!): User
-        addFeedback(place_id: Int!, rate: Int!, user_id: Int!, comment: Int!, budget_rating: Int!): FeedBack
+        addFeedback(place_id: Int!, rate: Int!, user_id: Int!, comment: String, budget_rating: Int!): FeedBack
         sendPlaceAddRequest(title: String!, adress: String!, category_id: Int!, latitude: Float, longitude: Float, submission_user_id: Int!, comment: String): Int
         manageSubmission(place_submission_id: ID!, opened: Boolean, add: Boolean!): Int
         changeFeedback(feedback_id: Int!, user_id: Int!, comment: String, rate: Int, budget_rating: Int): Int
