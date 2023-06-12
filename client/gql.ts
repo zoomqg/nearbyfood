@@ -139,3 +139,25 @@ export const EDIT_FEEDBACK = gql`
     changeFeedback(feedback_id: $feedbackId, user_id: $userId, budget_rating: $budgetRating, comment: $comment, rate: $rate)
   }
 `
+
+export const SEARCH_QUERY = gql`
+  query Places_by_name($searchValue: String!) {
+    places_by_name(search_value: $searchValue) {
+      ID
+      Title
+      Adress
+      Category {
+        ID
+        Category
+      }
+      Category_ID
+      Avg_Rating
+      Avg_Budget_Rating
+      Added_Timestamp
+      User {
+        Name
+        Surname
+      }
+    }
+  }
+`

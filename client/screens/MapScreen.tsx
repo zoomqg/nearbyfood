@@ -43,7 +43,9 @@ export default function MapScreen({ route, navigation }: any) {
   }
 
   const moveToSearchScreen = () =>{
-    navigation.navigate('SearchScreen');
+    navigation.navigate('SearchScreen', {
+      user_id: user_obj.ID
+    });
   }
 
   const onSearch = () => {
