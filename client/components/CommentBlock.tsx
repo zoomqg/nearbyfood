@@ -8,17 +8,12 @@ import { useNavigation } from '@react-navigation/native';
 type CommentType = {
   feedback: FeedBack;
   user_id: number;
+  openEditModal: (feedBackID: number) => void
 }
 
-export default function Comment({feedback, user_id}: CommentType) {
+export default function Comment({feedback, user_id, openEditModal}: CommentType) {
   const navigation = useNavigation();
   let canEdit = parseInt(feedback.User_ID) === parseInt(user_id);
-  const navigateToOtherScreen = () => {
-    navigation.navigate("EditCommentScreen", {
-      feedback_id: feedback.ID,
-      user_id: user_id,
-    });
-  };
   return (
     <View style={styles.comment}>
       <View style={styles.titleBar}>
@@ -35,7 +30,7 @@ export default function Comment({feedback, user_id}: CommentType) {
         {
           canEdit &&
           <View style={styles.icons}>
-            <Pressable onPress={navigateToOtherScreen}>
+            <Pressable onPress={() => openEditModal(parseInt(feedback.ID))}>
               <PencilSvg />
             </Pressable>
           </View>

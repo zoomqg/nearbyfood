@@ -17,12 +17,13 @@ import * as Linking from 'expo-linking';
 
 
 type InfoType = {
-  place: Place,
-  user_id: number,
-  feedback_arr: FeedBack[]
+  place: Place;
+  user_id: number;
+  feedback_arr: FeedBack[];
+  openEditModal: (feedBackID: number) => void;
 }
 
-export default function Info({ place, user_id, feedback_arr }: InfoType) {
+export default function Info({ place, user_id, feedback_arr, openEditModal }: InfoType) {
   const [showMore, setShowMore] = useState(false);
   const [isReportModalVisible, setReportModalVisible] = useState(false);
   const [reportText, setReportText] = useState('');
@@ -135,7 +136,7 @@ export default function Info({ place, user_id, feedback_arr }: InfoType) {
         <ScrollView showsVerticalScrollIndicator={false}>
           {feedback_arr.length > 0 ?
            feedback_arr.map((feedback, i) => (
-            <Comment key={i} feedback={feedback} user_id={user_id} />
+            <Comment key={i} feedback={feedback} user_id={user_id} openEditModal={openEditModal} />
           )) :
             <Text>
               There is no comments yet...
