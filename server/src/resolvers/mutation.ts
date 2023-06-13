@@ -16,28 +16,28 @@ const geocode_api_key = process.env.GOOGLE_GEOCODING_API_KEY as string
 
 const Mutation = {
     sendSMS: async (parent, args) => {
-        // const verification = await twilio.verify.v2.services(service_id).verifications.create({to: args.number, channel: 'sms'});
-        // if (verification.status == 'pending') return 200;
-        // else return 500;
-        return 200;
+        const verification = await twilio.verify.v2.services(service_id).verifications.create({to: args.number, channel: 'sms'});
+        if (verification.status == 'pending') return 200;
+        else return 500;
+        // return 200;
     },
 
     approveSMS: async (parent, args) => {
-        // let status = 0
-        // const verification = await twilio.verify.v2.services(service_id)
-        // .verificationChecks
-        // .create({to: args.number, code: args.code});
-        // if(verification.status == 'approved') {
-        //     status = 200;
-        // }
-        // else if (verification.status == 'pending') {
-        //     status = 400;
-        // }
-        // else {
-        //     status = 500
-        // }
+        let status = 0
+        const verification = await twilio.verify.v2.services(service_id)
+        .verificationChecks
+        .create({to: args.number, code: args.code});
+        if(verification.status == 'approved') {
+            status = 200;
+        }
+        else if (verification.status == 'pending') {
+            status = 400;
+        }
+        else {
+            status = 500
+        }
 
-        const status = 200;
+        // const status = 200;
 
         const existence_check = await prisma.user.count(
             {
