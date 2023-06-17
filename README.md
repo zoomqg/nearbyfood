@@ -85,9 +85,9 @@ Pārvietojieties uz klonētās repozitorija saknes direktoriju un pēc tam uz <b
 
 * Palaidiet komandu kas samontēs servera un datubāzes attēlus, pārnesīs nepieciešamos failus no repozitorija uz konteineru darba direktoriju un sasaistīs tos kopā.
 
-```
-docker-compose up
-```
+    ```
+    docker-compose up
+    ```
 
 Šī komanda iedarbinās divus konteinerus:
 
@@ -109,22 +109,22 @@ Lai tālrunī palaistu programmu, izpildiet tālāk norādītās darbības:
 1) Pārliecinieties, ka serveris ir veiksmīgi iedarbināts, izpildot dokumentācijā sniegtos norādījumus.
 2) Pārejiet uz <b>/client</b> direktoriju terminālī, izmantojot komandu 
 
-```
-cd client
-```
+    ```
+    cd client
+    ```
 
 3) Atveriet <b>contants.ts</b>. Kā konstantes <b>GRAPHQL_ADRESS</b> vērtību ievadiet savu backend adresi. Piemēram: Aizstājiet šo adresi ar savu aizmugurējās saskarnes faktisko adresi.
 4) Pārliecinieties, ka jūsu sistēmā jau ir instalēts <b>Node.js</b>. Ja tā nav, instalējiet Node.js, sekojot saitei sadaļā INFORMĀCIJAS AVOTI. Instalējiet nepieciešamās atkarības lietojumprogrammas klienta pusei, izpildot komandu.
 
-```
-npm install
-```
+    ```
+    npm install
+    ```
 
 5) Instalējiet Expo CLI globāli, izmantojot tālāk norādīto komandu. Tas ļaus jums izmantot Expo komandas no jebkura termināļa direktorija.
 
-```
-npm install -g expo-cli
-```
+    ```
+    npm install -g expo-cli
+    ```
 
 6) Lejupielādējiet <b>Expo</b> lietojumprogrammu savā mobilajā ierīcē, sekojot saitei INFORMĀCIJAS AVOTI. Pārliecinieties, ka dators un mobilā ierīce atrodas vienā lokālajā tīklā.
 7) Palaidiet Expo lietojumprogrammu, ievadot terminālī komandu 
@@ -144,5 +144,3 @@ npm install -g expo-cli
 
 
 Tagad jūsu lietotne darbojas jūsu mobilajā ierīcē, izmantojot Expo. Jūs varat ar to mijiedarboties un pārbaudīt tās funkcionalitāti.
-
-
