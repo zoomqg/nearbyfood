@@ -1,16 +1,6 @@
 ﻿# Starptautiska mobilā lietotne "NearbyFood" ērtai ēdināšanas iestāžu meklēšanai un novērtēšanai
 
-## Figma link
-
-https://www.figma.com/file/WARuGmmTqObTEASahFhZdJ/NearbyFood?type=design&node-id=0%3A1&t=GttPcILTv1w0J8mq-1
-
-
-## App demo (outdated)
-
-https://youtu.be/Wdzta5-ot9E
-
-
-## 1. UZDEVUMA NOSTRĀDNE
+## UZDEVUMA NOSTRĀDNE
 
 Kopējais darba uzdevums: Izveidot aplikāciju "NearbyFood", kas būs ērta un internacionāla platforma, kas veicinās komunikāciju un ēdināšanas iestāžu atklāšanu starp uzņēmējiem un privātpersonām, piedāvājot informāciju par tuvākajām ēdināšanas vietām visā pasaulē.
 Kvalifikācijas darba galvenie mērķi:
@@ -92,9 +82,9 @@ Pārvietojieties uz klonētās repozitorija saknes direktoriju un pēc tam uz <b
 Šī komanda iedarbinās divus konteinerus:
 
 1) datubāzes konteiners:
-* Pirmo reizi, kad tiks palaists datubāzes konteiners, tiks inicializēts no Docker Hub iegūtais MySQL 5.7 versijas attēls. Ieteicams izmantot šo versiju, jo tā tika izmantota sistēmas izstrādes laikā. Vecākas versijas nav ieteicamas, jo to funkcionalitāte var atšķirties. Inicializācijas laikā konteiners izmantos iepriekš definētas konstantes, lai izveidotu MySQL lietotāju, datubāzes nosaukumu, paroli un portu, ko izmantos, lai izveidotu savienojumu ar datubāzi. Konteinera saknes mapē tiks pievienots arī .sql fails, kas satur datubāzes dump failu ar visām tabulām un datiem.
+    * Pirmo reizi, kad tiks palaists datubāzes konteiners, tiks inicializēts no Docker Hub iegūtais MySQL 5.7 versijas attēls. Ieteicams izmantot šo versiju, jo tā tika izmantota sistēmas izstrādes laikā. Vecākas versijas nav ieteicamas, jo to funkcionalitāte var atšķirties. Inicializācijas laikā konteiners izmantos iepriekš definētas konstantes, lai izveidotu MySQL lietotāju, datubāzes nosaukumu, paroli un portu, ko izmantos, lai izveidotu savienojumu ar datubāzi. Konteinera saknes mapē tiks pievienots arī .sql fails, kas satur datubāzes dump failu ar visām tabulām un datiem.
 
-* Pēc inicializēšanas datubāze būs gatava darbam, un konteiners atvērs portu ārējiem savienojumiem.
+    * Pēc inicializēšanas datubāze būs gatava darbam, un konteiners atvērs portu ārējiem savienojumiem.
 
 2) Servera konteiners:
 Pirmo reizi palaižot servera konteineru, tiks inicializēts Node.js 14. versijas attēls. Kad Node.js ir instalēts, tiks instalētas package.json failā definētās atkarības.
