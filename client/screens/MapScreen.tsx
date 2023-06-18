@@ -107,7 +107,7 @@ export default function MapScreen({ route, navigation }: any) {
         </MapView>
         <SearchButton onPress={moveToSearchScreen} />
         <AddButton onPress={moveToPlaceSubmissionScreen} />
-        {data?.user_by_number.Role === 'ADMIN' && <AdminButton onPress={loadModerationPage} />}
+        { (data?.user_by_number.Role === 'ADMIN' || data?.user_by_number.Role === 'MODERATOR') && <AdminButton onPress={loadModerationPage} /> }
         <Button label="Filter" onPress={onSearch} />
         <FilterBar isVisible={isSearchVisible} onClose={onSearchClose} setMapDisplays={setMapDisplays} moveToPlaceSubmissionScreen={moveToPlaceSubmissionScreen}/>
       </View>
