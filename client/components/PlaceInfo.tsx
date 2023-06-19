@@ -174,6 +174,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: '700',
     fontSize: 24,
+    width: 170
   },
   titleh2: {
     marginTop: 10,

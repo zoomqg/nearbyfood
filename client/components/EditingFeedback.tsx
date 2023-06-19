@@ -59,17 +59,17 @@ export default function Edit({ user_id, label, feedback_id, place_id, onSuccess}
         variables: {
           budgetRating: budgetRaiting,
           comment: comment,
-          userId: user_id,
+          userId: parseInt(user_id),
           rate: raiting,
-          placeId: place_id
+          placeId: parseInt(place_id)
         },
       })
     }
     else {
       editFeedbackMutation({
         variables: {
-          feedbackId: feedback_id,
-          userId: user_id,
+          feedbackId: parseInt(feedback_id),
+          userId: parseInt(user_id),
           comment: comment,
           rate: raiting,
           budgetRating: budgetRaiting
